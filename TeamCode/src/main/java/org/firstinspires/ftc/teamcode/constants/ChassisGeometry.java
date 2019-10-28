@@ -10,6 +10,7 @@ package org.firstinspires.ftc.teamcode.constants;
  * without the possibility of conflict with the software team.
  */
 public final class ChassisGeometry {
-    public static int WHEEL_DIAMETER = 0;
+    public static int WHEEL_DIAMETER = 10;
     public static int AXEL_DISTANCE = 0;
+    public static float GEAR_RATIO = 1; //one turn of wheel = this many complete turns of motor
 }

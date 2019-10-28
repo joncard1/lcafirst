@@ -18,7 +18,7 @@ package org.firstinspires.ftc.teamcode.controller;
  * implement all of those methods in ways that interrelate in the object itself.
  */
 public interface RobotController {
-    public void moveForward(float centimeters);
-    public void turnRight(float degrees);
-    public void turnLeft(float degrees);
+    public void moveForward(double centimeters);
+    public void turnRight(double degrees);
+    public void turnLeft(double degrees);
 }
