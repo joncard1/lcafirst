@@ -19,8 +19,8 @@ public class RobotControllerV1 implements RobotController {
     private DcMotor leftDrive;
     private DcMotor rightDrive;
     public RobotControllerV1 (DcMotor leftDrive, DcMotor rightDrive) {
-        this.leftDrive = leftDrive;
-        this.rightDrive = rightDrive;
+       this.leftDrive = leftDrive;
+       this.rightDrive = rightDrive;
     }
     @Override
     public void moveForward(double centimeters) {
@@ -31,8 +31,8 @@ public class RobotControllerV1 implements RobotController {
         //144/PI ticks * gear ratio per 1 cm
 
         //these set directions cause a null pointer exception
-        leftDrive.setDirection(DcMotorSimple.Direction.REVERSE);
-        rightDrive.setDirection(DcMotorSimple.Direction.FORWARD);
+        leftDrive.setDirection(DcMotor.Direction.REVERSE);
+        rightDrive.setDirection(DcMotor.Direction.FORWARD);
         //this is still untested
         leftDrive.setTargetPosition((int)(144*Math.PI*centimeters*GEAR_RATIO));
         rightDrive.setTargetPosition((int)(144*Math.PI*centimeters*GEAR_RATIO));

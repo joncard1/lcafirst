@@ -32,6 +32,9 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.hardware.Gamepad;
 
+import org.firstinspires.ftc.teamcode.controller.RobotController;
+import org.firstinspires.ftc.teamcode.controller.RobotControllerV1;
+
 /**
  * This file contains an minimal example of a Linear "OpMode". An OpMode is a 'program' that runs in either
  * the autonomous or the teleop period of an FTC match. The names of OpModes appear on the menu
@@ -61,6 +64,7 @@ public class ManualOpMode extends LinearOpMode implements Gamepad.GamepadCallbac
 
     @Override
     public void runOpMode() {
+        //RobotController controller  = new RobotControllerV1 (leftDrive, rightDrive);
         expansion_Hub_2 = hardwareMap.get(Blinker.class, "Expansion Hub 2");
         //backLeft = hardwareMap.get(DcMotor.class, "backLeft");
         //backRight = hardwareMap.get(DcMotor.class, "backRight");
