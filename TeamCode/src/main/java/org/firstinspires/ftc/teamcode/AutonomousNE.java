@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -12,7 +13,7 @@ import org.firstinspires.ftc.teamcode.controller.RobotControllerV1;
  * corner in the scoring side, on the right if you stand in the starting side and face the scoring
  * side.
  */
-@TeleOp
+@Autonomous
 public class AutonomousNE extends LinearOpMode {
     private DcMotor rightDrive;
     private DcMotor leftDrive;
@@ -23,5 +24,15 @@ public class AutonomousNE extends LinearOpMode {
         RobotController controller  = new RobotControllerV1(leftDrive, rightDrive);
 
         controller.moveForward(30);
+        while (leftDrive.isBusy() && rightDrive.isBusy()) {
+
+        }
+        controller.turn(Math.PI/2);
+        /*controller.moveForward(30);
+        controller.turnRight(Math.PI/2);
+        controller.moveForward(-30);*/
+        while (leftDrive.isBusy() && rightDrive.isBusy()) {
+
+        }
     }
 }

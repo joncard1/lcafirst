@@ -4,6 +4,8 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 import static org.firstinspires.ftc.teamcode.constants.ChassisGeometry.GEAR_RATIO;
+import static org.firstinspires.ftc.teamcode.constants.ChassisGeometry.HALF_WIDTH;
+
 
 /**
  * This class implements that functionality defined in RobotController. The reason to separate
@@ -15,7 +17,6 @@ import static org.firstinspires.ftc.teamcode.constants.ChassisGeometry.GEAR_RATI
  * these methods.
  */
 public class RobotControllerV1 implements RobotController {
-    //setTargetPosition is probably between 0 and 2
     private DcMotor leftDrive;
     private DcMotor rightDrive;
     public RobotControllerV1 (DcMotor leftDrive, DcMotor rightDrive) {
@@ -30,23 +31,27 @@ public class RobotControllerV1 implements RobotController {
         //144/PI ticks per 1 cm assuming gear ratio of 1
         //144/PI ticks * gear ratio per 1 cm
 
-        //these set directions cause a null pointer exception
         leftDrive.setDirection(DcMotor.Direction.REVERSE);
         rightDrive.setDirection(DcMotor.Direction.FORWARD);
-        //this is still untested
-        leftDrive.setTargetPosition((int)(144*Math.PI*centimeters*GEAR_RATIO));
-        rightDrive.setTargetPosition((int)(144*Math.PI*centimeters*GEAR_RATIO));
+        leftDrive.setTargetPosition((int)((144/Math.PI)*centimeters*GEAR_RATIO));
+        rightDrive.setTargetPosition((int)((144/Math.PI)*centimeters*GEAR_RATIO));
         leftDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         rightDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        leftDrive.setPower(1);
+        rightDrive.setPower(1);
     }
 
     @Override
-    public void turnRight(double degrees) {
+    public void turn(double radians) {
+        leftDrive.setDirection(DcMotor.Direction.REVERSE);
+        rightDrive.setDirection(DcMotor.Direction.REVERSE);
+        leftDrive.setTargetPosition((int)((144/Math.PI)*HALF_WIDTH*radians*GEAR_RATIO));
+        rightDrive.setTargetPosition((int)((144/Math.PI)*HALF_WIDTH*radians*GEAR_RATIO));
+        leftDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        rightDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        leftDrive.setPower(1);
+        rightDrive.setPower(1);
 
     }
 
-    @Override
-    public void turnLeft(double degrees) {
-
-    }
 }

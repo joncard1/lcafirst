@@ -13,4 +13,5 @@ public final class ChassisGeometry {
     public static int WHEEL_DIAMETER = 10;
     public static int AXEL_DISTANCE = 0;
     public static float GEAR_RATIO = 1; //one turn of wheel = this many complete turns of motor
+    public static float HALF_WIDTH = 20; //centimeters between center of bot and wheel (currently set to center of wheel; might be interior edge)
 }

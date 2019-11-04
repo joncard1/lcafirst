@@ -19,6 +19,5 @@ package org.firstinspires.ftc.teamcode.controller;
  */
 public interface RobotController {
     public void moveForward(double centimeters);
-    public void turnRight(double degrees);
-    public void turnLeft(double degrees);
+    public void turn(double radius);
 }
