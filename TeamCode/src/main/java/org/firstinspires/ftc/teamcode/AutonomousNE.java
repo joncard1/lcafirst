@@ -23,6 +23,7 @@ public class AutonomousNE extends LinearOpMode {
         leftDrive = hardwareMap.get(DcMotor.class, "leftDrive");
         RobotController controller  = new RobotControllerV1(leftDrive, rightDrive);
 
+        //doesn't go forward then turn. Will only do one or the other
         controller.moveForward(30);
         while (leftDrive.isBusy() && rightDrive.isBusy()) {
 

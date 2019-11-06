@@ -94,8 +94,18 @@ public class ManualOpMode extends LinearOpMode implements Gamepad.GamepadCallbac
         while (opModeIsActive()) {
             telemetry.addData("Status", message);
             telemetry.update();
+
             if (this.gamepad1.a) {
-                controls *= -1;
+                controls = -1;
+            }
+            if (this.gamepad1.b) {
+                controls = 1;
+            }
+            if (this.gamepad1.dpad_up) { //servo anticlockwise
+                servo1.setPosition(2);
+            }
+            if (this.gamepad1.dpad_down) {
+                servo1.setPosition(-2);
             }
             if (controls == -1) { //driving control mode
                 leftPower = -gamepad1.left_stick_y;
