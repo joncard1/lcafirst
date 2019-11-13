@@ -33,8 +33,9 @@ public class RobotControllerV1 implements RobotController {
 
         leftDrive.setDirection(DcMotor.Direction.REVERSE);
         rightDrive.setDirection(DcMotor.Direction.FORWARD);
-        leftDrive.setTargetPosition((int)((144/Math.PI)*centimeters*GEAR_RATIO));
-        rightDrive.setTargetPosition((int)((144/Math.PI)*centimeters*GEAR_RATIO));
+
+        leftDrive.setTargetPosition((int)(leftDrive.getCurrentPosition() + (144/Math.PI)*centimeters*GEAR_RATIO));
+        rightDrive.setTargetPosition((int)(rightDrive.getCurrentPosition() + (144/Math.PI)*centimeters*GEAR_RATIO));
         leftDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         rightDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         leftDrive.setPower(1);
@@ -45,8 +46,8 @@ public class RobotControllerV1 implements RobotController {
     public void turn(double radians) {
         leftDrive.setDirection(DcMotor.Direction.REVERSE);
         rightDrive.setDirection(DcMotor.Direction.REVERSE);
-        leftDrive.setTargetPosition((int)((144/Math.PI)*HALF_WIDTH*radians*GEAR_RATIO));
-        rightDrive.setTargetPosition((int)((144/Math.PI)*HALF_WIDTH*radians*GEAR_RATIO));
+        leftDrive.setTargetPosition((int)(leftDrive.getCurrentPosition() + (144/Math.PI)*HALF_WIDTH*radians*GEAR_RATIO));
+        rightDrive.setTargetPosition((int)(rightDrive.getCurrentPosition() + (144/Math.PI)*HALF_WIDTH*radians*GEAR_RATIO));
         leftDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         rightDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         leftDrive.setPower(1);
