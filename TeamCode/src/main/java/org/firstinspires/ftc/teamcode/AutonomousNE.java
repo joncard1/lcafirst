@@ -29,9 +29,14 @@ public class AutonomousNE extends LinearOpMode {
 
         }
         controller.turn(Math.PI/2);
-        /*controller.moveForward(30);
-        controller.turnRight(Math.PI/2);
-        controller.moveForward(-30);*/
+        while (leftDrive.isBusy() && rightDrive.isBusy()) {
+
+        }
+        controller.moveForward(30);
+        while (leftDrive.isBusy() && rightDrive.isBusy()) {
+
+        }
+        controller.turn(Math.PI/2);
         while (leftDrive.isBusy() && rightDrive.isBusy()) {
 
         }

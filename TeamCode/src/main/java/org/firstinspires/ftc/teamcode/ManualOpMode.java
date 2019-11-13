@@ -61,6 +61,7 @@ public class ManualOpMode extends LinearOpMode implements Gamepad.GamepadCallbac
     private String message;
     double leftPower = 0;
     double rightPower = 0;
+    double servoPosition = 0;
 
     @Override
     public void runOpMode() {
@@ -70,6 +71,7 @@ public class ManualOpMode extends LinearOpMode implements Gamepad.GamepadCallbac
         //backRight = hardwareMap.get(DcMotor.class, "backRight");
         rightDrive = hardwareMap.get(DcMotor.class, "rightDrive");
         leftDrive = hardwareMap.get(DcMotor.class, "leftDrive");
+        servo1 = hardwareMap.get(Servo.class, "servo1");
         imu = hardwareMap.get(Gyroscope.class, "imu");
         try {
             Gamepad newGamepad = new Gamepad(this);
@@ -102,10 +104,10 @@ public class ManualOpMode extends LinearOpMode implements Gamepad.GamepadCallbac
                 controls = 1;
             }
             if (this.gamepad1.dpad_up) { //servo anticlockwise
-                servo1.setPosition(2);
+                servo1.setPosition(servo1.getPosition() - 0.5);
             }
             if (this.gamepad1.dpad_down) {
-                servo1.setPosition(-2);
+                servo1.setPosition(servo1.getPosition() + 0.5);
             }
             if (controls == -1) { //driving control mode
                 leftPower = -gamepad1.left_stick_y;
