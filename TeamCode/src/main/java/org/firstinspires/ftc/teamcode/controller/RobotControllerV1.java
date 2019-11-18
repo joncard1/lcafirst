@@ -33,13 +33,13 @@ public class RobotControllerV1 implements RobotController {
 
         leftDrive.setDirection(DcMotor.Direction.REVERSE);
         rightDrive.setDirection(DcMotor.Direction.FORWARD);
-
         leftDrive.setTargetPosition((int)(leftDrive.getCurrentPosition() + (144/Math.PI)*centimeters*GEAR_RATIO));
         rightDrive.setTargetPosition((int)(rightDrive.getCurrentPosition() + (144/Math.PI)*centimeters*GEAR_RATIO));
         leftDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         rightDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         leftDrive.setPower(1);
         rightDrive.setPower(1);
+        while (leftDrive.isBusy() && rightDrive.isBusy()) {}
     }
 
     @Override
@@ -52,6 +52,7 @@ public class RobotControllerV1 implements RobotController {
         rightDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         leftDrive.setPower(1);
         rightDrive.setPower(1);
+        while (leftDrive.isBusy() && rightDrive.isBusy()) {}
 
     }
 
