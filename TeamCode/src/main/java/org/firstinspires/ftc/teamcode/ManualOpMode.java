@@ -22,6 +22,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotorSimple.Direction;
 import com.qualcomm.robotcore.hardware.Blinker;
 import com.qualcomm.robotcore.hardware.Gyroscope;
@@ -55,7 +56,7 @@ public class ManualOpMode extends LinearOpMode implements Gamepad.GamepadCallbac
     //private DcMotor backRight;
     private DcMotor rightDrive;
     private DcMotor leftDrive;
-    private Servo servo1;
+    private CRServo servo1;
     private Gyroscope imu;
 
     private String message;
@@ -71,7 +72,7 @@ public class ManualOpMode extends LinearOpMode implements Gamepad.GamepadCallbac
         //backRight = hardwareMap.get(DcMotor.class, "backRight");
         rightDrive = hardwareMap.get(DcMotor.class, "rightDrive");
         leftDrive = hardwareMap.get(DcMotor.class, "leftDrive");
-        servo1 = hardwareMap.get(Servo.class, "servo1");
+        servo1 = hardwareMap.get(CRServo.class, "servo1");
         imu = hardwareMap.get(Gyroscope.class, "imu");
         try {
             Gamepad newGamepad = new Gamepad(this);
@@ -103,11 +104,16 @@ public class ManualOpMode extends LinearOpMode implements Gamepad.GamepadCallbac
             if (this.gamepad1.b) {
                 controls = 1;
             }
-            if (this.gamepad1.dpad_up) { //servo anticlockwise
-                servo1.setPosition(servo1.getPosition() - 0.5);
+            if (this.gamepad1.dpad_up) {
+                servo1.setDirection(Direction.REVERSE);
+                servo1.setPower(1);
             }
             if (this.gamepad1.dpad_down) {
-                servo1.setPosition(servo1.getPosition() + 0.5);
+                servo1.setDirection(Direction.FORWARD);
+                servo1.setPower(1);
+            }
+            if (this.gamepad1.x) {
+                servo1.setPower(0);
             }
             if (controls == -1) { //driving control mode
                 leftPower = -gamepad1.left_stick_y;
@@ -152,9 +158,6 @@ public class ManualOpMode extends LinearOpMode implements Gamepad.GamepadCallbac
     public void stopMoving() {
         leftPower = 0;
         rightPower = 0;
-    }
-    public void moveServo() {
-        servo1.setPosition(servo1.getPosition() + .5);
     }
     public void turn(double turnRate) { //negative value = left turn, positive value = right turn
         leftPower = turnRate;

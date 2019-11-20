@@ -39,7 +39,6 @@ public class RobotControllerV1 implements RobotController {
         rightDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         leftDrive.setPower(1);
         rightDrive.setPower(1);
-        while (leftDrive.isBusy() && rightDrive.isBusy()) {}
     }
 
     @Override
@@ -52,7 +51,6 @@ public class RobotControllerV1 implements RobotController {
         rightDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         leftDrive.setPower(1);
         rightDrive.setPower(1);
-        while (leftDrive.isBusy() && rightDrive.isBusy()) {}
 
     }
 

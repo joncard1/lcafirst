@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.ColorSensor;
+import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.teamcode.controller.RobotController;
@@ -28,24 +29,31 @@ public class AutonomousNE extends LinearOpMode {
 
 
         //for navigation points: turn left 90 and go until red
-
         controller.moveForward(30);
+        while (leftDrive.isBusy() && rightDrive.isBusy()) {}
 
         controller.turn(Math.PI/2);
+        while (leftDrive.isBusy() && rightDrive.isBusy()) {}
 
         controller.moveForward(30);
+        while (leftDrive.isBusy() && rightDrive.isBusy()) {}
 
         controller.turn(Math.PI/2);
+        while (leftDrive.isBusy() && rightDrive.isBusy()) {}
 
         controller.moveForward(30);
+        while (leftDrive.isBusy() && rightDrive.isBusy()) {}
 
         controller.turn(Math.PI/2);
+        while (leftDrive.isBusy() && rightDrive.isBusy()) {}
 
         controller.moveForward(30);
+        while (leftDrive.isBusy() && rightDrive.isBusy()) {}
 
         controller.turn(Math.PI/2);
+        while (leftDrive.isBusy() && rightDrive.isBusy()) {}
 
-        while (color1.red() == 0) {
+        while (color1.red() <= color1.blue()) {
             controller.moveForward(1);
         }
 
