@@ -90,7 +90,7 @@ public class ManualOpMode extends LinearOpMode implements Gamepad.GamepadCallbac
 
         this.message = "Running";
         // run until the end of the match (driver presses STOP)
-        int controls = -1;
+        short controls = -1;
         leftDrive.setDirection(Direction.REVERSE);
         rightDrive.setDirection(Direction.FORWARD);
 
@@ -103,6 +103,9 @@ public class ManualOpMode extends LinearOpMode implements Gamepad.GamepadCallbac
             }
             if (this.gamepad1.b) {
                 controls = 1;
+            }
+            if (this.gamepad1.a && this.gamepad1.b) {
+                controls = 0;
             }
             if (this.gamepad1.dpad_up) {
                 servo1.setDirection(Direction.REVERSE);
@@ -141,10 +144,13 @@ public class ManualOpMode extends LinearOpMode implements Gamepad.GamepadCallbac
                     leftPower = gamepad1.right_trigger / 5;
                     rightPower = gamepad1.right_trigger / 5;
                 }
-
-
-
-
+            }
+            if(controls == 0){
+                leftPower = -gamepad1.right_stick_y;
+                rightPower = -gamepad1.right_stick_y;
+                if(gamepad1.right_stick_x < 1 && gamepad1.right_stick_x > -1){
+                    speedConservingTurn(gamepad1.right_stick_x);
+                }
             }
             leftDrive.setPower(leftPower);
             rightDrive.setPower(rightPower);
@@ -162,6 +168,16 @@ public class ManualOpMode extends LinearOpMode implements Gamepad.GamepadCallbac
     public void turn(double turnRate) { //negative value = left turn, positive value = right turn
         leftPower = turnRate;
         rightPower = -turnRate;
+    }
+    //The difference between speedConservingTurn and turn is that turn causes the wheel of the turn to go in reverse. We should try out both of these.
+    public void speedConservingTurn(double turnRate) { //negative value = left turn, positive value = right turn
+        if(turnRate < 0){
+            leftPower = leftPower * -turnRate;
+            //rightPower = turnRate;
+        } else {
+            //leftPower = leftPower;
+            rightPower = turnRate * turnRate;
+        }
     }
    /* public void leftWheel(double throttle) {
         if(throttle > 0){
