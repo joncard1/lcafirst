@@ -56,6 +56,6 @@ public class AutonomousNE extends LinearOpMode {
         while (color1.red() <= color1.blue()) {
             controller.moveForward(1);
         }
-
+        //consider adding distance sensor. I dont know if this is the one we have, but it seems straightforward to impliment: https://wpilib.screenstepslive.com/s/currentCS/m/java/l/599715-ultrasonic-sensors-measuring-robot-distance-to-a-surface
     }
 }
