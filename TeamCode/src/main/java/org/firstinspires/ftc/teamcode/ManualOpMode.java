@@ -170,12 +170,12 @@ public class ManualOpMode extends LinearOpMode implements Gamepad.GamepadCallbac
     }
     //The difference between speedConservingTurn and turn is that turn causes the wheel of the turn to go in reverse. We should try out both of these.
     public void speedConservingTurn(double turnRate) { //negative value = left turn, positive value = right turn
-        if(turnRate < 0){
-            leftPower = leftPower * -turnRate;
+        if(turnRate < 0){//leftPower is positive when going forward
+            leftPower = leftPower * -turnRate;//when turn rate is negative, make it positive. Turn rate will be a decimal.
             //rightPower = turnRate;
         } else {
             //leftPower = leftPower;
-            rightPower = turnRate * turnRate;
+            rightPower = rightPower * turnRate;//turn rate is a positive decimal in this case.
         }
     }
    /* public void leftWheel(double throttle) {
