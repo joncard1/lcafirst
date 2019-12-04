@@ -99,9 +99,6 @@ public class ManualOpMode extends LinearOpMode implements Gamepad.GamepadCallbac
             telemetry.update();
 
             if (this.gamepad1.a) {
-                controls = -1;
-            }
-            if (this.gamepad1.b) {
                 controls = 1;
             }
             if (this.gamepad1.a && this.gamepad1.b) {
@@ -118,11 +115,13 @@ public class ManualOpMode extends LinearOpMode implements Gamepad.GamepadCallbac
             if (this.gamepad1.x) {
                 servo1.setPower(0);
             }
-            if (controls == -1) { //driving control mode
+            /*if (controls == -1) { //driving control mode
                 leftPower = -gamepad1.left_stick_y;
                 rightPower = -gamepad1.right_stick_y;
-            }
-            if (controls == 1) { //tower control mode
+            }*/
+            if (controls == 1) { //standard control mode (for now)
+                leftPower = -gamepad1.left_stick_y;
+                rightPower = -gamepad1.right_stick_y;
                 //clean up these if statements
                 if (gamepad1.left_bumper && gamepad1.right_bumper) {
                     turn(0);
