@@ -58,6 +58,7 @@ public class ManualOpMode extends LinearOpMode implements Gamepad.GamepadCallbac
     private DcMotor leftDrive;
     private CRServo servo1;
     private Gyroscope imu;
+    //private DigitalChannel touchSensor1;
 
     private String message;
     double leftPower = 0;
@@ -74,6 +75,7 @@ public class ManualOpMode extends LinearOpMode implements Gamepad.GamepadCallbac
         leftDrive = hardwareMap.get(DcMotor.class, "leftDrive");
         servo1 = hardwareMap.get(CRServo.class, "servo1");
         imu = hardwareMap.get(Gyroscope.class, "imu");
+        //touchSensor1  = hardwareMap.get(DigitalChannel.class, "digitalTouch");
         try {
             Gamepad newGamepad = new Gamepad(this);
             newGamepad.copy(gamepad1);
@@ -95,11 +97,15 @@ public class ManualOpMode extends LinearOpMode implements Gamepad.GamepadCallbac
         rightDrive.setDirection(Direction.FORWARD);
 
         while (opModeIsActive()) {
+            //this.message =
             telemetry.addData("Status", message);
             telemetry.update();
 
-            if (this.gamepad1.a) {
+            if (this.gamepad1.a) { //consolidate and clean up drive modes
                 controls = 1;
+            }
+            if (this.gamepad1.b) {
+                controls = -1;
             }
             if (this.gamepad1.a && this.gamepad1.b) {
                 controls = 0;
@@ -115,13 +121,11 @@ public class ManualOpMode extends LinearOpMode implements Gamepad.GamepadCallbac
             if (this.gamepad1.x) {
                 servo1.setPower(0);
             }
-            /*if (controls == -1) { //driving control mode
+            if (controls == -1) { //driving control mode
                 leftPower = -gamepad1.left_stick_y;
                 rightPower = -gamepad1.right_stick_y;
-            }*/
-            if (controls == 1) { //standard control mode (for now)
-                leftPower = -gamepad1.left_stick_y;
-                rightPower = -gamepad1.right_stick_y;
+            }
+            if (controls == 1) {
                 //clean up these if statements
                 if (gamepad1.left_bumper && gamepad1.right_bumper) {
                     turn(0);
@@ -147,9 +151,9 @@ public class ManualOpMode extends LinearOpMode implements Gamepad.GamepadCallbac
             if(controls == 0){
                 leftPower = -gamepad1.right_stick_y;
                 rightPower = -gamepad1.right_stick_y;
-                if(gamepad1.right_stick_x < 1 && gamepad1.right_stick_x > -1){
-                    speedConservingTurn(gamepad1.right_stick_x);
-                }
+                //if(gamepad1.right_stick_x < 1 && gamepad1.right_stick_x > -1){
+                speedConservingTurn(gamepad1.right_stick_x);
+                //}
             }
             leftDrive.setPower(leftPower);
             rightDrive.setPower(rightPower);
@@ -171,11 +175,11 @@ public class ManualOpMode extends LinearOpMode implements Gamepad.GamepadCallbac
     //The difference between speedConservingTurn and turn is that turn causes the wheel of the turn to go in reverse. We should try out both of these.
     public void speedConservingTurn(double turnRate) { //negative value = left turn, positive value = right turn
         if(turnRate < 0){//leftPower is positive when going forward
-            leftPower = leftPower * -turnRate;//when turn rate is negative, make it positive. Turn rate will be a decimal.
+            leftPower = leftPower + turnRate;//when turn rate is negative, make it positive. Turn rate will be a decimal.
             //rightPower = turnRate;
         } else {
             //leftPower = leftPower;
-            rightPower = rightPower * turnRate;//turn rate is a positive decimal in this case.
+            rightPower = rightPower - turnRate;//turn rate is a positive decimal in this case.
         }
     }
    /* public void leftWheel(double throttle) {
