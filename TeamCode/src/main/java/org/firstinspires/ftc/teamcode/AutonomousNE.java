@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DigitalChannel;
 
 import org.firstinspires.ftc.teamcode.controller.RobotController;
 import org.firstinspires.ftc.teamcode.controller.RobotControllerV1;
@@ -20,11 +21,13 @@ public class AutonomousNE extends LinearOpMode {
     private DcMotor rightDrive;
     private DcMotor leftDrive;
     private ColorSensor color1;
+    private DigitalChannel digitalTouch;
     @Override
     public void runOpMode() throws InterruptedException {
         rightDrive = hardwareMap.get(DcMotor.class, "rightDrive");
         leftDrive = hardwareMap.get(DcMotor.class, "leftDrive");
         color1 = hardwareMap.get(ColorSensor.class, "color1");
+        digitalTouch = hardwareMap.get(DigitalChannel.class, "digitalTouch");
         RobotController controller  = new RobotControllerV1(leftDrive, rightDrive);
 
 
@@ -35,11 +38,17 @@ public class AutonomousNE extends LinearOpMode {
         controller.turn(Math.PI/2*-1);
         while (leftDrive.isBusy() && rightDrive.isBusy()) {}
 
+        while(!digitalTouch.getState()){
+            controller.moveForward(5);
+        }
 
-        while (color1.red() <= color1.blue()) {
+        /*while (color1.red() <= color1.blue()) {
             controller.moveForward(5);
             //try setting zeroPowerMode to float later
-        }
+        }*/
+
+
+
         //consider adding distance sensor. I dont know if this is the one we have, but it seems straightforward to impliment: https://wpilib.screenstepslive.com/s/currentCS/m/java/l/599715-ultrasonic-sensors-measuring-robot-distance-to-a-surface
     }
 }
