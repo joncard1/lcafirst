@@ -38,16 +38,30 @@ public class AutonomousNE extends LinearOpMode {
         controller.turn(Math.PI/2*-1);
         while (leftDrive.isBusy() && rightDrive.isBusy()) {}
 
-        while(!digitalTouch.getState()){
-            controller.moveForward(5);
-        }
+        //while(!digitalTouch.getState()){
+        //    controller.moveForward(5);
+        //}
 
-        /*while (color1.red() <= color1.blue()) {
+        while (color1.red() <= color1.blue()) {
             controller.moveForward(5);
             //try setting zeroPowerMode to float later
-        }*/
-
-
+        }
+        while (leftDrive.isBusy() && rightDrive.isBusy()) {}
+        controller.moveForward(30);
+        while (leftDrive.isBusy() && rightDrive.isBusy()) {}
+        controller.turn(Math.PI/2*-1);while (leftDrive.isBusy() && rightDrive.isBusy()) {}
+        controller.moveForward(60);while (leftDrive.isBusy() && rightDrive.isBusy()) {}
+        controller.turn(Math.PI/2*-1);while (leftDrive.isBusy() && rightDrive.isBusy()) {}
+        controller.moveForward(30);while (leftDrive.isBusy() && rightDrive.isBusy()) {}
+        controller.turn(Math.PI/2*-1);while (leftDrive.isBusy() && rightDrive.isBusy()) {}
+        controller.moveForward(60);while (leftDrive.isBusy() && rightDrive.isBusy()) {}
+        controller.turn(Math.PI/2*-1);while (leftDrive.isBusy() && rightDrive.isBusy()) {}//grabbed stone
+        //controller.moveForward(60);while (leftDrive.isBusy() && rightDrive.isBusy()) {}
+        while (color1.red() <= color1.blue()) {
+            controller.moveForward(5);
+            //try setting zeroPowerMode to float later
+        }
+        controller.moveForward(60);while (leftDrive.isBusy() && rightDrive.isBusy()) {}
 
         //consider adding distance sensor. I dont know if this is the one we have, but it seems straightforward to impliment: https://wpilib.screenstepslive.com/s/currentCS/m/java/l/599715-ultrasonic-sensors-measuring-robot-distance-to-a-surface
     }

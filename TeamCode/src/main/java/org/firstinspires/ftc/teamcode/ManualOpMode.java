@@ -90,7 +90,7 @@ public class ManualOpMode extends LinearOpMode implements Gamepad.GamepadCallbac
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
 
-        this.message = "Running";
+        this.message = "Running. Build 2020.1.1";
         // run until the end of the match (driver presses STOP)
         short controls = -1;
         leftDrive.setDirection(Direction.REVERSE);
