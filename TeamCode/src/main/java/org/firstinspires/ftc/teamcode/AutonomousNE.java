@@ -29,16 +29,46 @@ public class AutonomousNE extends LinearOpMode {
 
 
         //for navigation points: turn left 90 and go until red
-        controller.moveForward(30);
-        while (leftDrive.isBusy() && rightDrive.isBusy()) {}
+        controller.moveForward(30);while (leftDrive.isBusy() && rightDrive.isBusy()) {}
 
-        controller.turn(Math.PI/2*-1);
-        while (leftDrive.isBusy() && rightDrive.isBusy()) {}
+        controller.turn(Math.PI/2*-1);while (leftDrive.isBusy() && rightDrive.isBusy()) {}//left turn
 
-
-        while (color1.red() <= color1.blue()) {
+        while (color1.red() >= color1.blue()) { //figure out offset/telemetry
+            //figure out how to speed this up
             controller.moveForward(1);
         }
+
+       /* controller.moveForward(240);while (leftDrive.isBusy() && rightDrive.isBusy()) {}
+        controller.turn(Math.PI/2);while (leftDrive.isBusy() && rightDrive.isBusy()) {}
+        controller.moveForward(120);while (leftDrive.isBusy() && rightDrive.isBusy()) {}
+        controller.turn(Math.PI/2*-1);while (leftDrive.isBusy() && rightDrive.isBusy()) {}
+        controller.moveForward(30);while (leftDrive.isBusy() && rightDrive.isBusy()) {}
+        controller.turn(Math.PI/2*-1);while (leftDrive.isBusy() && rightDrive.isBusy()) {}
+        controller.moveForward(120);while (leftDrive.isBusy() && rightDrive.isBusy()) {}
+        controller.turn(Math.PI/2*-1);while (leftDrive.isBusy() && rightDrive.isBusy()) {}
+        while (color1.red() >= color1.blue()) {
+            controller.moveForward(1);
+        }
+        controller.moveForward(120);while (leftDrive.isBusy() && rightDrive.isBusy()) {}
+        controller.turn(Math.PI/2*-1);while (leftDrive.isBusy() && rightDrive.isBusy()) {}
+        controller.turn(Math.PI/2*-1);while (leftDrive.isBusy() && rightDrive.isBusy()) {}
+        while (color1.red() >= color1.blue()) {
+            controller.moveForward(1);
+        }
+
+
+        while (true) {
+            if(color1.red() >= color1.blue()){
+                controller.moveForward(240);while (leftDrive.isBusy() && rightDrive.isBusy()) {}
+                controller.turn(Math.PI/2*-1);while (leftDrive.isBusy() && rightDrive.isBusy()) {}
+                controller.turn(Math.PI/2*-1);while (leftDrive.isBusy() && rightDrive.isBusy()) {}
+            }
+        }*/
+
+
+
+
+
         //consider adding distance sensor. I dont know if this is the one we have, but it seems straightforward to impliment: https://wpilib.screenstepslive.com/s/currentCS/m/java/l/599715-ultrasonic-sensors-measuring-robot-distance-to-a-surface
     }
 }

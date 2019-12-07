@@ -101,6 +101,12 @@ public class ManualOpMode extends LinearOpMode implements Gamepad.GamepadCallbac
             if (this.gamepad1.a) {
                 controls = 1;
             }
+            if (this.gamepad1.b) {
+                controls = -1;
+            }
+            if (this.gamepad1.y) {
+                controls = 2;
+            }
             if (this.gamepad1.a && this.gamepad1.b) {
                 controls = 0;
             }
@@ -115,13 +121,11 @@ public class ManualOpMode extends LinearOpMode implements Gamepad.GamepadCallbac
             if (this.gamepad1.x) {
                 servo1.setPower(0);
             }
-            /*if (controls == -1) { //driving control mode
+            if (controls == -1) { //driving control mode
                 leftPower = -gamepad1.left_stick_y;
                 rightPower = -gamepad1.right_stick_y;
-            }*/
+            }
             if (controls == 1) { //standard control mode (for now)
-                leftPower = -gamepad1.left_stick_y;
-                rightPower = -gamepad1.right_stick_y;
                 //clean up these if statements
                 if (gamepad1.left_bumper && gamepad1.right_bumper) {
                     turn(0);
@@ -142,6 +146,29 @@ public class ManualOpMode extends LinearOpMode implements Gamepad.GamepadCallbac
                 } else if (gamepad1.right_trigger > 0) {
                     leftPower = gamepad1.right_trigger / 5;
                     rightPower = gamepad1.right_trigger / 5;
+                }
+            }
+            if (controls == 2) { //standard control mode (for now)
+                //clean up these if statements
+                if (gamepad1.left_bumper && gamepad1.right_bumper) {
+                    turn(0);
+                    //catches if both left and right are pressed
+                } else if (this.gamepad1.left_bumper) {
+                    turn(-0.75);
+                } else if (this.gamepad1.right_bumper) {
+                    turn(0.75);
+                } else {
+                    turn(0);
+                }
+                if (gamepad1.left_trigger > 0 && gamepad1.right_trigger > 0) {
+                    stopMoving();
+                    //this catches if both forward and reverse are pressed. Result is braking
+                } else if (gamepad1.left_trigger > 0){
+                    leftPower = -gamepad1.left_trigger;
+                    rightPower = -gamepad1.left_trigger;
+                } else if (gamepad1.right_trigger > 0) {
+                    leftPower = gamepad1.right_trigger;
+                    rightPower = gamepad1.right_trigger;
                 }
             }
             if(controls == 0){
