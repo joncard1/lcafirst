@@ -22,6 +22,7 @@ public class AutonomousNE extends LinearOpMode {
     private ColorSensor color1;
     @Override
     public void runOpMode() throws InterruptedException {
+        //maybe use while opModeIsActive?
         rightDrive = hardwareMap.get(DcMotor.class, "rightDrive");
         leftDrive = hardwareMap.get(DcMotor.class, "leftDrive");
         color1 = hardwareMap.get(ColorSensor.class, "color1");
