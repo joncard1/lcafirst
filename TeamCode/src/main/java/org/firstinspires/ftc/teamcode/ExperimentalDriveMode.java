@@ -65,39 +65,46 @@ public class ExperimentalDriveMode extends LinearOpMode /*implements Gamepad.Gam
 
         this.message = "Running";
         // run until the end of the match (driver presses STOP)
-        short controls = -1;
         leftDrive.setDirection(Direction.REVERSE);
         rightDrive.setDirection(Direction.FORWARD);
 
         while (opModeIsActive()) {
            /* telemetry.addData("Status", message);
             telemetry.update();*/
-            if (gamepad1.left_bumper && gamepad1.right_bumper) {
-                turn(0);
-                //catches if both left and right are pressed
-            } else if (this.gamepad1.left_bumper) {
-                turn(-.25*throttle);
-            } else if (this.gamepad1.right_bumper) {
-                turn(.25*throttle);
+
+            //initially sets speed values to triggers (later conditionals change this as necessary)
+            leftPower = currentSpeed();
+            rightPower = currentSpeed();
+
+            //Decides whether to turn and if so, whether to do a moving turn (stop the inside wheel) or a stationary turn (reverse the inside wheel)
+            if (forward() || reverse()) {
+                if (rightTurn() && leftTurn()) {
+                    //does nothing if both are pressed
+                } else if (leftTurn()) {
+                    movingTurn(-1);
+                } else if (rightTurn()) {
+                    movingTurn(1);
+                }
             } else {
-                turn(0);
+                //basic stationary turning
+                if (leftTurn() && rightTurn()) {
+                    //does nothing if both are pressed
+                } else if (leftTurn()) {
+                    turn(-.25*throttle);
+                } else if (rightTurn()) {
+                    turn(.25 * throttle);
+                }
             }
-            if (gamepad1.left_trigger > 0 && gamepad1.right_trigger > 0) {
-                stopMoving();
-                //this catches if both forward and reverse are pressed. Result is braking
-            } else if (gamepad1.left_trigger > 0){
-                leftPower = -gamepad1.left_trigger * .25*throttle;
-                rightPower = -gamepad1.left_trigger * .25*throttle;
-            } else if (gamepad1.right_trigger > 0) {
-                leftPower = gamepad1.right_trigger * .25*throttle;
-                rightPower = gamepad1.right_trigger * .25*throttle;
-            }
+
+            //throttle level adjustment via D-Pad
             if (this.gamepad1.dpad_up && throttle < 4) {
                 throttle++;
             }
             if (this.gamepad1.dpad_down && throttle > 1) {
                 throttle--;
             }
+            leftDrive.setPower(leftPower);
+            rightDrive.setPower(rightPower);
 
 
             /*if (controls == -1) { //driving control mode
@@ -174,6 +181,30 @@ public class ExperimentalDriveMode extends LinearOpMode /*implements Gamepad.Gam
         leftPower = turnRate;
         rightPower = -turnRate;
     }
+    public void movingTurn (int turnDirection) { //1 for right, -1 for left
+        //this method stops one wheel based on inputted turn direction
+        if (turnDirection == 1) {
+            rightPower = 0;
+        } else if (turnDirection == -1) {
+            leftPower = 0;
+        }
+    }
+    public boolean forward () {
+        return this.gamepad1.right_trigger > 0;
+    }
+    public boolean reverse () {
+        return this.gamepad1.left_trigger > 0;
+    }
+    public boolean rightTurn () {
+        return this.gamepad1.right_bumper;
+    }
+    public boolean leftTurn () {
+        return this.gamepad1.left_bumper;
+    }
+    public double currentSpeed () {
+        return (gamepad1.right_trigger - gamepad1.left_trigger) * .25*throttle;
+    }
+
  /*   //The difference between speedConservingTurn and turn is that turn causes the wheel of the turn to go in reverse. We should try out both of these.
     public void speedConservingTurn(double turnRate) { //negative value = left turn, positive value = right turn
         if(turnRate < 0){//leftPower is positive when going forward
