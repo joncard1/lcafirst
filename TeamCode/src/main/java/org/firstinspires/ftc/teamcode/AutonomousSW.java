@@ -23,6 +23,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
+//import com.qualcomm.robotcore.hardware.Gyroscope;
 
 import org.firstinspires.ftc.teamcode.controller.RobotController;
 import org.firstinspires.ftc.teamcode.controller.RobotControllerV1;
@@ -37,13 +38,14 @@ public class AutonomousSW extends LinearOpMode {
     private DcMotor rightDrive;
     private DcMotor leftDrive;
     private ColorSensor color1;
+    //private Gyroscope imu;
     @Override
     public void runOpMode() throws InterruptedException {
         rightDrive = hardwareMap.get(DcMotor.class, "rightDrive");
         leftDrive = hardwareMap.get(DcMotor.class, "leftDrive");
         color1 = hardwareMap.get(ColorSensor.class, "color1");
+        //imu = hardwareMap.get(Gyroscope.class, "imu");
         RobotController controller  = new RobotControllerV1(leftDrive, rightDrive);
-
 
         //for navigation points: turn left 90 and go until red
         controller.moveForward(30);
