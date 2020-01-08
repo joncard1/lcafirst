@@ -4,7 +4,6 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.ColorSensor;
-import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.teamcode.controller.RobotController;
@@ -24,27 +23,7 @@ public class AutonomousNE extends LinearOpMode {
     private DcMotor leftDrive = hardwareMap.get(DcMotor.class, "leftDrive");
     RobotController controller  = new RobotControllerV1(leftDrive, rightDrive);
 
-    double right = -Math.PI/2;
-    double left = Math.PI/2;
-    public void newMove(double distance){
-        controller.moveForward(distance);while (leftDrive.isBusy() && rightDrive.isBusy()) {};
-    }
-    //right = -pi/2
-    //left = pi/2
-    public void newTurn(double angle){
-        angle = -angle;
-        controller.turn(angle);while (leftDrive.isBusy() && rightDrive.isBusy()) {};
-    }
-    public void goUntilBlue(){
-        while (color1.red() <= color1.blue()) {
-            controller.moveForward(1);
-        }
-    }
-    public void goUntilRed(){
-        while (color1.red() >= color1.blue()) {
-            controller.moveForward(1);
-        }
-    }
+    
     @Override
     public void runOpMode() throws InterruptedException {
         //maybe use while opModeIsActive?
@@ -54,7 +33,7 @@ public class AutonomousNE extends LinearOpMode {
         controller  = new RobotControllerV1(leftDrive, rightDrive);
 
         newMove(15);
-        goUntilRed();
+        goUntilRed(color1);
         newMove(15);
         newTurn(right);
         newMove(45);
@@ -63,7 +42,7 @@ public class AutonomousNE extends LinearOpMode {
         newTurn(left);
         newMove(45);
         newTurn(left);
-        goUntilRed();
+        goUntilRed(color1);
         newMove(15);
 
 

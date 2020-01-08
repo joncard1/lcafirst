@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.controller;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.ColorSensor;
 
 import static org.firstinspires.ftc.teamcode.constants.ChassisGeometry.GEAR_RATIO;
 import static org.firstinspires.ftc.teamcode.constants.ChassisGeometry.HALF_WIDTH;
@@ -51,7 +52,26 @@ public class RobotControllerV1 implements RobotController {
         rightDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         leftDrive.setPower(1);
         rightDrive.setPower(1);
-
     }
-
+    double right = -Math.PI/2;
+    double left = Math.PI/2;
+    public void newMove(double distance){
+        moveForward(distance);while (leftDrive.isBusy() && rightDrive.isBusy()) {};
+    }
+    //right = -pi/2
+    //left = pi/2
+    public void newTurn(double angle){
+        angle = -angle;
+        turn(angle);while (leftDrive.isBusy() && rightDrive.isBusy()) {};
+    }
+    public void goUntilBlue(ColorSensor color1){
+        while (color1.red() <= color1.blue()) {
+            moveForward(1);
+        }
+    }
+    public void goUntilRed(ColorSensor color1){
+        while (color1.red() >= color1.blue()) {
+            moveForward(1);
+        }
+    }
 }
