@@ -12,6 +12,6 @@ package org.firstinspires.ftc.teamcode.constants;
 public final class ChassisGeometry {
     public static int WHEEL_DIAMETER = 10;
     public static int AXEL_DISTANCE = 0;
-    public static float GEAR_RATIO = 1; //one turn of wheel = this many complete turns of motor
-    public static float HALF_WIDTH = 20; //centimeters between center of bot and wheel (currently set to center of wheel; might be interior edge)
+    public static double GEAR_RATIO = .75; //one turn of wheel = this many complete turns of motor
+    public static double HALF_WIDTH = 19.7; //centimeters between center of bot and wheel (currently set to center of wheel; might be interior edge)
 }
