@@ -44,10 +44,46 @@ public class AutonomousSE extends LinearOpMode {
         leftDrive = hardwareMap.get(DcMotor.class, "leftDrive");
         color1 = hardwareMap.get(ColorSensor.class, "color1");
         RobotController controller  = new RobotControllerV1(leftDrive, rightDrive);
+        public void newMove(int distance){
+            controller.moveForward(distance);while (leftDrive.isBusy() && rightDrive.isBusy()) {};
+        }
+        //right = -pi/2
+        //left = pi/2
+        public void newTurn(int angle){
+            angle = -angle;
+            controller.turn(angle);while (leftDrive.isBusy() && rightDrive.isBusy()) {};
+        }
+        public void goUntilBlue(){
+            while (color1.red() <= color1.blue()) { 
+                controller.moveForward(1);
+            }
+        }
+        public void goUntilRed(){
+            while (color1.red() >= color1.blue()) { 
+                controller.moveForward(1);
+            }
+        }
 
+        int right = -pi/2;
+        int left = pi/2;
+        newMove(15);
+        newTurn(right);
+        goUntilRed();
+        newTurn(left);
+        newTurn(left);
+        newMove(15);
+        newTurn(right);
+        newMove(45);
+        newTurn(left);
+        newMove(12);
+        newTurn(left);
+        newMove(45);
+        newTurn(left);
+        goUntilRed();
+        newMove(15);
 
         //for navigation points: turn right 90 and go until red
-        controller.moveForward(30);
+        /*controller.moveForward(30);
         while (leftDrive.isBusy() && rightDrive.isBusy()) {}
 
         controller.turn(Math.PI/2);
@@ -56,7 +92,7 @@ public class AutonomousSE extends LinearOpMode {
 
         while (color1.red() >= color1.blue()) {
             controller.moveForward(1);
-        }
+        }*/
         //consider adding distance sensor. I dont know if this is the one we have, but it seems straightforward to impliment: https://wpilib.screenstepslive.com/s/currentCS/m/java/l/599715-ultrasonic-sensors-measuring-robot-distance-to-a-surface
     }
 }
