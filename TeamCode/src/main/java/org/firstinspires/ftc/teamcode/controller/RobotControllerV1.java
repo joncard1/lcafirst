@@ -53,22 +53,24 @@ public class RobotControllerV1 implements RobotController {
         leftDrive.setPower(1);
         rightDrive.setPower(1);
     }
-    double right = -Math.PI/2;
-    double left = Math.PI/2;
+    @Override
     public void newMove(double distance){
         moveForward(distance);while (leftDrive.isBusy() && rightDrive.isBusy()) {};
     }
     //right = -pi/2
     //left = pi/2
-    public void newTurn(double angle){
-        angle = -angle;
-        turn(angle);while (leftDrive.isBusy() && rightDrive.isBusy()) {};
+    @Override
+    public void newTurn(double rad){
+        rad = -rad;
+        turn(rad);while (leftDrive.isBusy() && rightDrive.isBusy()) {};
     }
+    @Override
     public void goUntilBlue(ColorSensor color1){
         while (color1.red() <= color1.blue()) {
             moveForward(1);
         }
     }
+    @Override
     public void goUntilRed(ColorSensor color1){
         while (color1.red() >= color1.blue()) {
             moveForward(1);
