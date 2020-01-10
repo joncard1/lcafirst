@@ -34,12 +34,14 @@ import org.firstinspires.ftc.teamcode.controller.RobotControllerV1;
  */
 @Autonomous
 public class AutonomousNW extends LinearOpMode {
+    double right = -Math.PI/2;
+    double left = Math.PI/2;
     private ColorSensor color1 = hardwareMap.get(ColorSensor.class, "color1");;
     private DcMotor rightDrive = hardwareMap.get(DcMotor.class, "rightDrive");
     private DcMotor leftDrive = hardwareMap.get(DcMotor.class, "leftDrive");
     RobotController controller  = new RobotControllerV1(leftDrive, rightDrive);
 
-    
+
     @Override
     public void runOpMode() throws InterruptedException {
         //maybe use while opModeIsActive?
@@ -47,19 +49,19 @@ public class AutonomousNW extends LinearOpMode {
         leftDrive = hardwareMap.get(DcMotor.class, "leftDrive");
         color1 = hardwareMap.get(ColorSensor.class, "color1");
         controller  = new RobotControllerV1(leftDrive, rightDrive);
-        
-        newMove(15);
-        newTurn(right);
-        goUntilBlue();
-        newTurn(left);
-        newMove(45);
-        newTurn(right);
-        newMove(12);
-        newTurn(right);
-        newMove(45);
-        newTurn(right);
-        goUntilBlue();
-        newMove(15);
+
+        controller.newMove(15);
+        controller.newTurn(right);
+        controller.goUntilBlue(color1);
+        controller.newTurn(left);
+        controller.newMove(45);
+        controller.newTurn(right);
+        controller.newMove(12);
+        controller.newTurn(right);
+        controller.newMove(45);
+        controller.newTurn(right);
+        controller.goUntilBlue(color1);
+        controller.newMove(15);
 
         //for navigation points: turn left 90 and go until red
         /*controller.moveForward(30);
