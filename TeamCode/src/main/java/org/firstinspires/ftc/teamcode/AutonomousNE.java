@@ -16,8 +16,6 @@ import org.firstinspires.ftc.teamcode.controller.RobotControllerV1;
  */
 @Autonomous
 public class AutonomousNE extends LinearOpMode {
-    /*private DcMotor rightDrive;
-    private DcMotor leftDrive;*/
     private ColorSensor color1 = hardwareMap.get(ColorSensor.class, "color1");;
     private DcMotor rightDrive = hardwareMap.get(DcMotor.class, "rightDrive");
     private DcMotor leftDrive = hardwareMap.get(DcMotor.class, "leftDrive");
