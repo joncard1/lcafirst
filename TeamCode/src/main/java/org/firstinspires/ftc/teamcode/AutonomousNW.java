@@ -34,41 +34,20 @@ import org.firstinspires.ftc.teamcode.controller.RobotControllerV1;
  */
 @Autonomous
 public class AutonomousNW extends LinearOpMode {
-    /*private DcMotor rightDrive;
-    private DcMotor leftDrive;*/
     private ColorSensor color1 = hardwareMap.get(ColorSensor.class, "color1");;
     private DcMotor rightDrive = hardwareMap.get(DcMotor.class, "rightDrive");
     private DcMotor leftDrive = hardwareMap.get(DcMotor.class, "leftDrive");
     RobotController controller  = new RobotControllerV1(leftDrive, rightDrive);
 
-    double right = -Math.PI/2;
-    double left = Math.PI/2;
-    public void newMove(double distance){
-        controller.moveForward(distance);while (leftDrive.isBusy() && rightDrive.isBusy()) {};
-    }
-    //right = -pi/2
-    //left = pi/2
-    public void newTurn(double angle){
-        angle = -angle;
-        controller.turn(angle);while (leftDrive.isBusy() && rightDrive.isBusy()) {};
-    }
-    public void goUntilBlue(){
-        while (color1.red() <= color1.blue()) {
-            controller.moveForward(1);
-        }
-    }
-    public void goUntilRed(){
-        while (color1.red() >= color1.blue()) {
-            controller.moveForward(1);
-        }
-    }
+    
     @Override
     public void runOpMode() throws InterruptedException {
+        //maybe use while opModeIsActive?
         rightDrive = hardwareMap.get(DcMotor.class, "rightDrive");
         leftDrive = hardwareMap.get(DcMotor.class, "leftDrive");
         color1 = hardwareMap.get(ColorSensor.class, "color1");
         controller  = new RobotControllerV1(leftDrive, rightDrive);
-
+        
         newMove(15);
         newTurn(right);
         goUntilBlue();
