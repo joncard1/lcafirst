@@ -56,7 +56,7 @@ public class RobotControllerV1 implements RobotController {
     double right = -Math.PI/2;
     double left = Math.PI/2;
     public void newMove(double distance){
-        distance = distance * 120.02 * 3 / 140//cm to cm. the full field is 1200.2*3 mm and the virtual field is 1400mm
+        distance = distance * 120.02 * 3 / 140;//cm to cm. the full field is 1200.2*3 mm and the virtual field is 1400mm
         moveForward(distance);while (leftDrive.isBusy() && rightDrive.isBusy()) {};
     }
     //right = -pi/2

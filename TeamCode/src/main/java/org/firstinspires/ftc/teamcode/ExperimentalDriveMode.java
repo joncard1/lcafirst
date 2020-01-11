@@ -87,14 +87,14 @@ public class ExperimentalDriveMode extends LinearOpMode /*implements Gamepad.Gam
             }
 
             //throttle level adjustment via D-Pad
-            if (this.gamepad1.dpad_up && throttle < 4) {
+            if (this.gamepad1.dpad_up && throttle < 4 && adjust) {
                 throttle++;
                 adjust = false;
-            } else if (this.gamepad1.dpad_down && throttle > 1) {
+            } else if (this.gamepad1.dpad_down && throttle > 1 && adjust) {
                 throttle--;
                 adjust = false;
             } else {
-               adjust = true;
+                adjust = true;
             }
 
             //finally sets power based on what the variables leftPower and rightPower are after all checks
