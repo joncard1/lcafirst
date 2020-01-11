@@ -54,7 +54,6 @@ public class AutonomousSW extends LinearOpMode {
         controller.goUntilBlue(color1);
         controller.newTurn(right);
         controller.newTurn(right);
-        controller.goUntilBlue(color1);
         controller.newTurn(left);
         controller.newMove(45);
         controller.newTurn(right);

@@ -32,7 +32,7 @@ public class AutonomousNE extends LinearOpMode {
         color1 = hardwareMap.get(ColorSensor.class, "color1");
         controller  = new RobotControllerV1(leftDrive, rightDrive);
 
-        controller.newMove(15);
+        /*controller.newMove(15);
         controller.newTurn(left);
         controller.goUntilRed(color1);
         controller.newMove(15);
@@ -44,7 +44,7 @@ public class AutonomousNE extends LinearOpMode {
         controller.newMove(45);
         controller.newTurn(left);
         controller.goUntilRed(color1);
-        controller.newMove(15);
+        controller.newMove(15);*/
 
 
 

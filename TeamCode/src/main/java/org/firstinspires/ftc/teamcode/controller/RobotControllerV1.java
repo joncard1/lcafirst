@@ -55,21 +55,25 @@ public class RobotControllerV1 implements RobotController {
     }
     //double right = -Math.PI/2;
     //double left = Math.PI/2;
+    @Override
     public void newMove(double distance){
         distance = distance * 120.02 * 3 / 140;//cm to cm. the full field is 1200.2*3 mm and the virtual field is 1400mm
         moveForward(distance);while (leftDrive.isBusy() && rightDrive.isBusy()) {};
     }
     //right = -pi/2
     //left = pi/2
+    @Override
     public void newTurn(double angle){
         angle = -angle;
         turn(angle);while (leftDrive.isBusy() && rightDrive.isBusy()) {};
     }
+    @Override
     public void goUntilBlue(ColorSensor color1){
         while (color1.red() <= color1.blue()) {
             moveForward(1);
         }
     }
+    @Override
     public void goUntilRed(ColorSensor color1){
         while (color1.red() >= color1.blue()) {
             moveForward(1);

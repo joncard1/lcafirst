@@ -93,7 +93,7 @@ public class ExperimentalDriveMode extends LinearOpMode /*implements Gamepad.Gam
             } else if (this.gamepad1.dpad_down && throttle > 1 && adjust) {
                 throttle--;
                 adjust = false;
-            } else {
+            } else if (!this.gamepad1.dpad_up && !this.gamepad1.dpad_down) {
                 adjust = true;
             }
 
