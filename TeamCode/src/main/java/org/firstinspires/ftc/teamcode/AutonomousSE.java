@@ -35,28 +35,48 @@ import org.firstinspires.ftc.teamcode.controller.RobotControllerV1;
  */
 @Autonomous
 public class AutonomousSE extends LinearOpMode {
-    private DcMotor rightDrive;
-    private DcMotor leftDrive;
-    private ColorSensor color1;
+    private ColorSensor color1 = hardwareMap.get(ColorSensor.class, "color1");;
+    private DcMotor rightDrive = hardwareMap.get(DcMotor.class, "rightDrive");
+    private DcMotor leftDrive = hardwareMap.get(DcMotor.class, "leftDrive");
+    RobotController controller  = new RobotControllerV1(leftDrive, rightDrive);
+    double right = -Math.PI/2;
+    double left = Math.PI/2;
+
     @Override
     public void runOpMode() throws InterruptedException {
+        //maybe use while opModeIsActive?
         rightDrive = hardwareMap.get(DcMotor.class, "rightDrive");
         leftDrive = hardwareMap.get(DcMotor.class, "leftDrive");
         color1 = hardwareMap.get(ColorSensor.class, "color1");
-        RobotController controller  = new RobotControllerV1(leftDrive, rightDrive);
+        controller  = new RobotControllerV1(leftDrive, rightDrive);
 
+        controller.newMove(15);
+        controller.newTurn(right);
+        controller.goUntilRed(color1);
+        controller.newTurn(left);
+        controller.newTurn(left);
+        controller.newMove(15);
+        controller.newTurn(right);
+        controller.newMove(45);
+        controller.newTurn(left);
+        controller.newMove(12);
+        controller.newTurn(left);
+        controller.newMove(45);
+        controller.newTurn(left);
+        controller.goUntilRed(color1);
+        controller.newMove(15);
 
         //for navigation points: turn right 90 and go until red
-        controller.moveForward(30);
+        /*controller.moveForward(30);
         while (leftDrive.isBusy() && rightDrive.isBusy()) {}
 
         controller.turn(Math.PI/2);
         while (leftDrive.isBusy() && rightDrive.isBusy()) {}
 
 
-        while (color1.red() <= color1.blue()) {
-            controller.moveForward(5);
-        }
+        while (color1.red() >= color1.blue()) {
+            controller.moveForward(1);
+        }*/
         //consider adding distance sensor. I dont know if this is the one we have, but it seems straightforward to impliment: https://wpilib.screenstepslive.com/s/currentCS/m/java/l/599715-ultrasonic-sensors-measuring-robot-distance-to-a-surface
     }
 }

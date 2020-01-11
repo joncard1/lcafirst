@@ -4,9 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.ColorSensor;
-import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DigitalChannel;
 
 import org.firstinspires.ftc.teamcode.controller.RobotController;
 import org.firstinspires.ftc.teamcode.controller.RobotControllerV1;
@@ -18,50 +16,83 @@ import org.firstinspires.ftc.teamcode.controller.RobotControllerV1;
  */
 @Autonomous
 public class AutonomousNE extends LinearOpMode {
-    private DcMotor rightDrive;
-    private DcMotor leftDrive;
-    private ColorSensor color1;
-    private DigitalChannel digitalTouch;
+    private ColorSensor color1 = hardwareMap.get(ColorSensor.class, "color1");;
+    private DcMotor rightDrive = hardwareMap.get(DcMotor.class, "rightDrive");
+    private DcMotor leftDrive = hardwareMap.get(DcMotor.class, "leftDrive");
+    RobotController controller  = new RobotControllerV1(leftDrive, rightDrive);
+    double right = -Math.PI/2;
+    double left = Math.PI/2;
+
+
     @Override
     public void runOpMode() throws InterruptedException {
+        //maybe use while opModeIsActive?
         rightDrive = hardwareMap.get(DcMotor.class, "rightDrive");
         leftDrive = hardwareMap.get(DcMotor.class, "leftDrive");
         color1 = hardwareMap.get(ColorSensor.class, "color1");
-        digitalTouch = hardwareMap.get(DigitalChannel.class, "digitalTouch");
-        RobotController controller  = new RobotControllerV1(leftDrive, rightDrive);
+        controller  = new RobotControllerV1(leftDrive, rightDrive);
+
+        controller.newMove(15);
+        controller.newTurn(left);
+        controller.goUntilRed(color1);
+        controller.newMove(15);
+        controller.newTurn(right);
+        controller.newMove(45);
+        controller.newTurn(left);
+        controller.newMove(12);
+        controller.newTurn(left);
+        controller.newMove(45);
+        controller.newTurn(left);
+        controller.goUntilRed(color1);
+        controller.newMove(15);
+
+
+
+
+
+
 
 
         //for navigation points: turn left 90 and go until red
-        controller.moveForward(30);
-        while (leftDrive.isBusy() && rightDrive.isBusy()) {}
+        //controller.moveForward(30);while (leftDrive.isBusy() && rightDrive.isBusy()) {}
 
-        controller.turn(Math.PI/2*-1);
-        while (leftDrive.isBusy() && rightDrive.isBusy()) {}
+        //controller.turn(Math.PI/2*-1);while (leftDrive.isBusy() && rightDrive.isBusy()) {}//left turn
 
-        //while(!digitalTouch.getState()){
-        //    controller.moveForward(5);
-        //}
+        /*while (color1.red() >= color1.blue()) { //figure out offset/telemetry
+            //figure out how to speed this up
+            controller.moveForward(1);
+        }*/
 
-        while (color1.red() <= color1.blue()) {
-            controller.moveForward(5);
-            //try setting zeroPowerMode to float later
-        }
-        while (leftDrive.isBusy() && rightDrive.isBusy()) {}
-        controller.moveForward(30);
-        while (leftDrive.isBusy() && rightDrive.isBusy()) {}
-        controller.turn(Math.PI/2*-1);while (leftDrive.isBusy() && rightDrive.isBusy()) {}
-        controller.moveForward(60);while (leftDrive.isBusy() && rightDrive.isBusy()) {}
+       /* controller.moveForward(240);while (leftDrive.isBusy() && rightDrive.isBusy()) {}
+        controller.turn(Math.PI/2);while (leftDrive.isBusy() && rightDrive.isBusy()) {}
+        controller.moveForward(120);while (leftDrive.isBusy() && rightDrive.isBusy()) {}
         controller.turn(Math.PI/2*-1);while (leftDrive.isBusy() && rightDrive.isBusy()) {}
         controller.moveForward(30);while (leftDrive.isBusy() && rightDrive.isBusy()) {}
         controller.turn(Math.PI/2*-1);while (leftDrive.isBusy() && rightDrive.isBusy()) {}
-        controller.moveForward(60);while (leftDrive.isBusy() && rightDrive.isBusy()) {}
-        controller.turn(Math.PI/2*-1);while (leftDrive.isBusy() && rightDrive.isBusy()) {}//grabbed stone
-        //controller.moveForward(60);while (leftDrive.isBusy() && rightDrive.isBusy()) {}
-        while (color1.red() <= color1.blue()) {
-            controller.moveForward(5);
-            //try setting zeroPowerMode to float later
+        controller.moveForward(120);while (leftDrive.isBusy() && rightDrive.isBusy()) {}
+        controller.turn(Math.PI/2*-1);while (leftDrive.isBusy() && rightDrive.isBusy()) {}
+        while (color1.red() >= color1.blue()) {
+            controller.moveForward(1);
         }
-        controller.moveForward(60);while (leftDrive.isBusy() && rightDrive.isBusy()) {}
+        controller.moveForward(120);while (leftDrive.isBusy() && rightDrive.isBusy()) {}
+        controller.turn(Math.PI/2*-1);while (leftDrive.isBusy() && rightDrive.isBusy()) {}
+        controller.turn(Math.PI/2*-1);while (leftDrive.isBusy() && rightDrive.isBusy()) {}
+        while (color1.red() >= color1.blue()) {
+            controller.moveForward(1);
+        }
+
+
+        while (true) {
+            if(color1.red() >= color1.blue()){
+                controller.moveForward(240);while (leftDrive.isBusy() && rightDrive.isBusy()) {}
+                controller.turn(Math.PI/2*-1);while (leftDrive.isBusy() && rightDrive.isBusy()) {}
+                controller.turn(Math.PI/2*-1);while (leftDrive.isBusy() && rightDrive.isBusy()) {}
+            }
+        }*/
+
+
+
+
 
         //consider adding distance sensor. I dont know if this is the one we have, but it seems straightforward to impliment: https://wpilib.screenstepslive.com/s/currentCS/m/java/l/599715-ultrasonic-sensors-measuring-robot-distance-to-a-surface
     }

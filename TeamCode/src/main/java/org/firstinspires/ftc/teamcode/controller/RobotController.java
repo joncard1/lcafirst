@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.controller;
 
+import com.qualcomm.robotcore.hardware.ColorSensor;
+
 /**
  * I defined this interface to describe how to interact with an object of this type. It is the
  * responsibility of whatever object implements it to fulfill the promise that calling
@@ -20,4 +22,9 @@ package org.firstinspires.ftc.teamcode.controller;
 public interface RobotController {
     public void moveForward(double centimeters);
     public void turn(double radius);
+    public void newMove(double distance);
+    public void newTurn(double angle);
+    public void goUntilBlue(ColorSensor color1);
+    public void goUntilRed(ColorSensor color1);
+
 }
