@@ -16,10 +16,10 @@ import org.firstinspires.ftc.teamcode.controller.RobotControllerV1;
  */
 @Autonomous
 public class AutonomousNE extends LinearOpMode {
-    private ColorSensor color1 = hardwareMap.get(ColorSensor.class, "color1");;
-    private DcMotor rightDrive = hardwareMap.get(DcMotor.class, "rightDrive");
-    private DcMotor leftDrive = hardwareMap.get(DcMotor.class, "leftDrive");
-    RobotController controller  = new RobotControllerV1(leftDrive, rightDrive);
+    public ColorSensor color1 = hardwareMap.get(ColorSensor.class, "color1");
+    public DcMotor rightDrive = hardwareMap.get(DcMotor.class, "rightDrive");
+    public DcMotor leftDrive = hardwareMap.get(DcMotor.class, "leftDrive");
+    public RobotController controller  = new RobotControllerV1(leftDrive, rightDrive);
     double right = -Math.PI/2;
     double left = Math.PI/2;
 
@@ -32,7 +32,7 @@ public class AutonomousNE extends LinearOpMode {
         color1 = hardwareMap.get(ColorSensor.class, "color1");
         controller  = new RobotControllerV1(leftDrive, rightDrive);
 
-        /*controller.newMove(15);
+        controller.newMove(15);
         controller.newTurn(left);
         controller.goUntilRed(color1);
         controller.newMove(15);
@@ -44,7 +44,7 @@ public class AutonomousNE extends LinearOpMode {
         controller.newMove(45);
         controller.newTurn(left);
         controller.goUntilRed(color1);
-        controller.newMove(15);*/
+        controller.newMove(15);
 
 
 
