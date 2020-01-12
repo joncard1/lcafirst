@@ -69,14 +69,15 @@ public class RobotControllerV1 implements RobotController {
     }
     @Override
     public void goUntilBlue(ColorSensor color1){
-        while (color1.red() <= color1.blue()) {
+        while (color1.green()>50||color1.red()>50||color1.blue()<200) {
             moveForward(1);
         }
     }
     @Override
     public void goUntilRed(ColorSensor color1){
-        while (color1.red() >= color1.blue()) {
+        while (color1.green()>100||color1.red()<200||color1.blue()>100) {
             moveForward(1);
         }
     }
+
 } 
