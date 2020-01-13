@@ -3,9 +3,11 @@ package org.firstinspires.ftc.teamcode.controller;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.ColorSensor;
+import com.qualcomm.robotcore.hardware.DistanceSensor;
 
 import static org.firstinspires.ftc.teamcode.constants.ChassisGeometry.GEAR_RATIO;
 import static org.firstinspires.ftc.teamcode.constants.ChassisGeometry.HALF_WIDTH;
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
 
 /**
@@ -18,8 +20,9 @@ import static org.firstinspires.ftc.teamcode.constants.ChassisGeometry.HALF_WIDT
  * these methods.
  */
 public class RobotControllerV1 implements RobotController {
-    private DcMotor leftDrive;
-    private DcMotor rightDrive;
+    public DcMotor leftDrive;
+    public DcMotor rightDrive;
+    public DistanceSensor distance_sensor;
     public RobotControllerV1 (DcMotor leftDrive, DcMotor rightDrive) {
        this.leftDrive = leftDrive;
        this.rightDrive = rightDrive;
@@ -75,5 +78,17 @@ public class RobotControllerV1 implements RobotController {
         while (color1.red() >= color1.blue()) {
             moveForward(1);
         }
+    }
+    @Override
+    public void initializeDistanceSensor1(DistanceSensor sensorInQuestion){
+        distance_sensor = sensorInQuestion;
+    }
+    @Override
+    public double getDistance(){
+    return distance_sensor.getDistance(DistanceUnit.MM);
+    }
+    @Override
+    public void initializeDCMotor1(DcMotor motor){
+        leftDrive = motor;
     }
 }

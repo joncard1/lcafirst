@@ -5,9 +5,12 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DistanceSensor;
 
 import org.firstinspires.ftc.teamcode.controller.RobotController;
 import org.firstinspires.ftc.teamcode.controller.RobotControllerV1;
+
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
 /**
  * I have provided this class for the possibility that we are in autonomous mode and started in the
@@ -31,6 +34,10 @@ public class AutonomousNE extends LinearOpMode {
         leftDrive = hardwareMap.get(DcMotor.class, "leftDrive");
         color1 = hardwareMap.get(ColorSensor.class, "color1");
         controller  = new RobotControllerV1(leftDrive, rightDrive);
+        controller.initializeDistanceSensor1(hardwareMap.get(DistanceSensor.class, "distance1"));
+        while(controller.getDistance()>20){
+            controller.newMove(1);
+        }
 
         controller.newMove(15);
         controller.goUntilRed(color1);

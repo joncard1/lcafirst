@@ -1,5 +1,9 @@
 package org.firstinspires.ftc.teamcode.controller;
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.ColorSensor;
+import com.qualcomm.robotcore.hardware.DistanceSensor;
+
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
 /**
  * I defined this interface to describe how to interact with an object of this type. It is the
@@ -25,4 +29,7 @@ public interface RobotController {
     public void goUntilBlue(ColorSensor color1);
     public void newMove(double centimeters);
     public void newTurn(double rad);
+    public void initializeDistanceSensor1(DistanceSensor sensor);
+    public double getDistance();
+    public void initializeDCMotor1(DcMotor motor);
 }
