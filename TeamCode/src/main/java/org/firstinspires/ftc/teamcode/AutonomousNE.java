@@ -5,12 +5,9 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DistanceSensor;
 
 import org.firstinspires.ftc.teamcode.controller.RobotController;
 import org.firstinspires.ftc.teamcode.controller.RobotControllerV1;
-
-import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
 /**
  * I have provided this class for the possibility that we are in autonomous mode and started in the
@@ -19,8 +16,6 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
  */
 @Autonomous
 public class AutonomousNE extends LinearOpMode {
-    double right = -Math.PI/2;
-    double left = Math.PI/2;
     private ColorSensor color1 = hardwareMap.get(ColorSensor.class, "color1");;
     private DcMotor rightDrive = hardwareMap.get(DcMotor.class, "rightDrive");
     private DcMotor leftDrive = hardwareMap.get(DcMotor.class, "leftDrive");
@@ -34,23 +29,19 @@ public class AutonomousNE extends LinearOpMode {
         leftDrive = hardwareMap.get(DcMotor.class, "leftDrive");
         color1 = hardwareMap.get(ColorSensor.class, "color1");
         controller  = new RobotControllerV1(leftDrive, rightDrive);
-        controller.initializeDistanceSensor1(hardwareMap.get(DistanceSensor.class, "distance1"));
-        while(controller.getDistance()>20){
-            controller.newMove(1);
-        }
 
-        controller.newMove(15);
-        controller.goUntilRed(color1);
-        controller.newMove(15);
-        controller.newTurn(right);
-        controller.newMove(45);
-        controller.newTurn(left);
-        controller.newMove(12);
-        controller.newTurn(left);
-        controller.newMove(45);
-        controller.newTurn(left);
-        controller.goUntilRed(color1);
-        controller.newMove(15);
+        newMove(15);
+        goUntilRed(color1);
+        newMove(15);
+        newTurn(right);
+        newMove(45);
+        newTurn(left);
+        newMove(12);
+        newTurn(left);
+        newMove(45);
+        newTurn(left);
+        goUntilRed(color1);
+        newMove(15);
 
 
 

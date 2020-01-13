@@ -27,7 +27,6 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple.Direction;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.Gyroscope;
 @TeleOp
-
 public class ExperimentalDriveMode extends LinearOpMode /*implements Gamepad.GamepadCallback*/ {
     private Blinker expansion_Hub_2;
     private DcMotor rightDrive;
@@ -49,6 +48,7 @@ public class ExperimentalDriveMode extends LinearOpMode /*implements Gamepad.Gam
         leftDrive = hardwareMap.get(DcMotor.class, "leftDrive");
         servo1 = hardwareMap.get(CRServo.class, "servo1");
         imu = hardwareMap.get(Gyroscope.class, "imu");
+        boolean adjust = true;
         telemetry.addData("Status", "Initialized");
         telemetry.update();
         // Wait for the game to start (driver presses PLAY)
@@ -86,11 +86,14 @@ public class ExperimentalDriveMode extends LinearOpMode /*implements Gamepad.Gam
             }
 
             //throttle level adjustment via D-Pad
-            if (this.gamepad1.dpad_up && throttle < 4) {
+            if (this.gamepad1.dpad_up && throttle < 4 && adjust) {
                 throttle++;
-            }
-            if (this.gamepad1.dpad_down && throttle > 1) {
+                adjust = false;
+            } else if (this.gamepad1.dpad_down && throttle > 1 && adjust) {
                 throttle--;
+                adjust = false;
+            } else if (!this.gamepad1.dpad_up && !this.gamepad1.dpad_down) {
+                adjust = true;
             }
 
             //finally sets power based on what the variables leftPower and rightPower are after all checks
