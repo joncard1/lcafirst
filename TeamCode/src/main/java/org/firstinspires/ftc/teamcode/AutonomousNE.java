@@ -34,7 +34,12 @@ public class AutonomousNE extends LinearOpMode {
         color1 = hardwareMap.get(ColorSensor.class, "color1");
         distanceSensor1 = hardwareMap.get(DistanceSensor.class, "distance1");
 
+        controller.initializeDistanceSensor1(distanceSensor1);
 
+        while(controller.getDistance() > 200){
+            controller.newMove(1);
+        }
+/*
         controller.newMove(15);
         controller.goUntilRed(color1);
         controller.newMove(15);
@@ -46,7 +51,7 @@ public class AutonomousNE extends LinearOpMode {
         controller.newMove(45);
         controller.newTurn(left);
         controller.goUntilRed(color1);
-        controller.newMove(15);
+        controller.newMove(15);*/
 
 
 
