@@ -36,10 +36,12 @@ public class AutonomousNE extends LinearOpMode {
 
         controller.initializeDistanceSensor1(distanceSensor1);
 
-        while(controller.getDistance() > 200){
+        while(controller.getDistance() > 100){
             controller.newMove(1);
         }
-/*
+
+
+        /*
         controller.newMove(15);
         controller.goUntilRed(color1);
         controller.newMove(15);
