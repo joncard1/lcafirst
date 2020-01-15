@@ -23,6 +23,8 @@ public class RobotControllerV1 implements RobotController {
     public DcMotor leftDrive;
     public DcMotor rightDrive;
     public DistanceSensor distance_sensor;
+    public double right = -Math.PI/2;
+    public double left = Math.PI/2;
     public RobotControllerV1 (DcMotor leftDrive, DcMotor rightDrive) {
        this.leftDrive = leftDrive;
        this.rightDrive = rightDrive;
