@@ -26,8 +26,8 @@ public class RobotControllerV1 implements RobotController {
     public double right = -Math.PI/2;
     public double left = Math.PI/2;
     public RobotControllerV1 (DcMotor leftDrive, DcMotor rightDrive) {
-       this.leftDrive = leftDrive;
        this.rightDrive = rightDrive;
+       this.leftDrive = leftDrive;
     }
     @Override
     public void moveForward(double centimeters) {
@@ -37,8 +37,8 @@ public class RobotControllerV1 implements RobotController {
         //144/PI ticks per 1 cm assuming gear ratio of 1
         //144/PI ticks * gear ratio per 1 cm
 
-        leftDrive.setDirection(DcMotor.Direction.REVERSE);
-        rightDrive.setDirection(DcMotor.Direction.FORWARD);
+        leftDrive.setDirection(DcMotor.Direction.FORWARD);
+        rightDrive.setDirection(DcMotor.Direction.REVERSE);
         leftDrive.setTargetPosition((int)(leftDrive.getCurrentPosition() + (144/Math.PI)*centimeters*GEAR_RATIO));
         rightDrive.setTargetPosition((int)(rightDrive.getCurrentPosition() + (144/Math.PI)*centimeters*GEAR_RATIO));
         leftDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -49,8 +49,8 @@ public class RobotControllerV1 implements RobotController {
 
     @Override
     public void turn(double radians) {
-        leftDrive.setDirection(DcMotor.Direction.REVERSE);
-        rightDrive.setDirection(DcMotor.Direction.REVERSE);
+        leftDrive.setDirection(DcMotor.Direction.FORWARD);
+        rightDrive.setDirection(DcMotor.Direction.FORWARD);
         leftDrive.setTargetPosition((int)(leftDrive.getCurrentPosition() + (144/Math.PI)*HALF_WIDTH*radians*GEAR_RATIO));
         rightDrive.setTargetPosition((int)(rightDrive.getCurrentPosition() + (144/Math.PI)*HALF_WIDTH*radians*GEAR_RATIO));
         leftDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
