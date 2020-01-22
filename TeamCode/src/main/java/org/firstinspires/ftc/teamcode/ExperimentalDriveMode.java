@@ -37,7 +37,8 @@ public class ExperimentalDriveMode extends LinearOpMode /*implements Gamepad.Gam
     private String message;
     double leftPower = 0;
     double rightPower = 0;
-    double throttle = 1;
+    int throttle = 1;
+    double [] throttleLevels = new double [] {0.1, 0.5, 1.0};
 
 
     @Override
@@ -82,17 +83,17 @@ public class ExperimentalDriveMode extends LinearOpMode /*implements Gamepad.Gam
                 if (leftTurn() && rightTurn()) {
                     //does nothing if both are pressed
                 } else if (leftTurn()) {
-                    turn(-.25*throttle);
+                    turn(-throttleLevels[throttle] / 2);
                 } else if (rightTurn()) {
-                    turn(.25 * throttle);
+                    turn(throttleLevels[throttle] / 2);
                 }
             }
 
             //throttle level adjustment via D-Pad
-            if (this.gamepad1.dpad_up && throttle < 4 && adjust) {
+            if (this.gamepad1.dpad_up && throttle < throttleLevels.length - 1 && adjust) {
                 throttle++;
                 adjust = false;
-            } else if (this.gamepad1.dpad_down && throttle > 1 && adjust) {
+            } else if (this.gamepad1.dpad_down && throttle > 0 && adjust) {
                 throttle--;
                 adjust = false;
             } else if (!this.gamepad1.dpad_up && !this.gamepad1.dpad_down) {
@@ -144,6 +145,6 @@ public class ExperimentalDriveMode extends LinearOpMode /*implements Gamepad.Gam
         return this.gamepad1.left_bumper;
     }
     public double currentSpeed () {
-        return (gamepad1.right_trigger - gamepad1.left_trigger) * .25*throttle;
+        return (gamepad1.right_trigger - gamepad1.left_trigger) * throttleLevels[throttle];
     }
 }
