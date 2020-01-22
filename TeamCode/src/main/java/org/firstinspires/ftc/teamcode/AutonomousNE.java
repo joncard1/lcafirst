@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DistanceSensor;
 
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.teamcode.controller.RobotController;
 import org.firstinspires.ftc.teamcode.controller.RobotControllerV1;
 
@@ -17,26 +18,29 @@ import org.firstinspires.ftc.teamcode.controller.RobotControllerV1;
  */
 @Autonomous
 public class AutonomousNE extends LinearOpMode {
-    private ColorSensor color1 = hardwareMap.get(ColorSensor.class, "color1");;
-    private DcMotor rightDrive = hardwareMap.get(DcMotor.class, "rightDrive");
-    private DcMotor leftDrive = hardwareMap.get(DcMotor.class, "leftDrive");
-    private DistanceSensor distanceSensor1 = hardwareMap.get(DistanceSensor.class, "distance1");
-    RobotController controller  = new RobotControllerV1(leftDrive, rightDrive);
+    private ColorSensor color1;// = hardwareMap.get(ColorSensor.class, "color1");;
+    private DcMotor rightDrive;// = hardwareMap.get(DcMotor.class, "rightDrive");
+    private DcMotor leftDrive;// = hardwareMap.get(DcMotor.class, "leftDrive");
+    private DistanceSensor distanceSensor1;// = hardwareMap.get(DistanceSensor.class, "distance1");
+    RobotController controller;//  = new RobotControllerV1(leftDrive, rightDrive);
 
     public double right = -Math.PI/2;
     public double left = Math.PI/2;
     
     @Override
     public void runOpMode() throws InterruptedException {
-        controller  = new RobotControllerV1(leftDrive, rightDrive);
         rightDrive = hardwareMap.get(DcMotor.class, "rightDrive");
         leftDrive = hardwareMap.get(DcMotor.class, "leftDrive");
-        color1 = hardwareMap.get(ColorSensor.class, "color1");
+        controller  = new RobotControllerV1(leftDrive, rightDrive);
+        //color1 = hardwareMap.get(ColorSensor.class, "color1");
         distanceSensor1 = hardwareMap.get(DistanceSensor.class, "distance1");
 
-        controller.initializeDistanceSensor1(distanceSensor1);
-
-        while(controller.getDistance() > 100){
+        //controller.initializeDistanceSensor1(distanceSensor1);
+        telemetry.addData("status","starting");
+        telemetry.update();
+        while(distanceSensor1.getDistance(DistanceUnit.MM) > 100){
+            telemetry.addData("status","running");
+            telemetry.update();
             controller.newMove(1);
         }
 
