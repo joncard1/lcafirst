@@ -39,7 +39,7 @@ public class AutonomousNE extends LinearOpMode {
         telemetry.addData("status","starting");
         telemetry.update();
         while(distanceSensor1.getDistance(DistanceUnit.MM) > 100){
-            telemetry.addData("status","running");
+            telemetry.addData("distance",distanceSensor1.getDistance(DistanceUnit.MM));
             telemetry.update();
             controller.newMove(1);
         }
