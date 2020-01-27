@@ -37,7 +37,8 @@ public class ExperimentalDriveMode extends LinearOpMode /*implements Gamepad.Gam
     private String message;
     double leftPower = 0;
     double rightPower = 0;
-    double throttle = 1;
+    int throttle = 1;
+    double [] throttleLevels = new double [] {0.1, 0.5, 1.0};
 
 
     @Override
@@ -59,14 +60,11 @@ public class ExperimentalDriveMode extends LinearOpMode /*implements Gamepad.Gam
         leftDrive.setDirection(Direction.REVERSE);
         rightDrive.setDirection(Direction.FORWARD);
 
-
         while (opModeIsActive()) {
 
             //initially sets speed values to triggers (later conditionals change this as necessary)
             leftPower = currentSpeed();
             rightPower = currentSpeed();
-
-
 
             //Decides whether to turn and if so, whether to do a moving turn (stop the inside wheel) or a stationary turn (reverse the inside wheel)
             if (forward() || reverse()) {
@@ -82,17 +80,17 @@ public class ExperimentalDriveMode extends LinearOpMode /*implements Gamepad.Gam
                 if (leftTurn() && rightTurn()) {
                     //does nothing if both are pressed
                 } else if (leftTurn()) {
-                    turn(-.25*throttle);
+                    turn(-throttleLevels[throttle] / 2);
                 } else if (rightTurn()) {
-                    turn(.25 * throttle);
+                    turn(throttleLevels[throttle] / 2);
                 }
             }
 
             //throttle level adjustment via D-Pad
-            if (this.gamepad1.dpad_up && throttle < 4 && adjust) {
+            if (this.gamepad1.dpad_up && throttle < throttleLevels.length - 1 && adjust) {
                 throttle++;
                 adjust = false;
-            } else if (this.gamepad1.dpad_down && throttle > 1 && adjust) {
+            } else if (this.gamepad1.dpad_down && throttle > 0 && adjust) {
                 throttle--;
                 adjust = false;
             } else if (!this.gamepad1.dpad_up && !this.gamepad1.dpad_down) {
@@ -102,16 +100,6 @@ public class ExperimentalDriveMode extends LinearOpMode /*implements Gamepad.Gam
             //finally sets power based on what the variables leftPower and rightPower are after all checks
             leftDrive.setPower(leftPower);
             rightDrive.setPower(rightPower);
-
-            if(this.gamepad1.a) {
-                servo1.setDirection(Direction.REVERSE);
-                servo1.setPower(1);
-            }else if(this.gamepad1.b){
-                servo1.setDirection(Direction.FORWARD);
-                servo1.setPower(1);
-            }else{
-                servo1.setPower(0);
-            }
         }
     }
 
@@ -144,6 +132,6 @@ public class ExperimentalDriveMode extends LinearOpMode /*implements Gamepad.Gam
         return this.gamepad1.left_bumper;
     }
     public double currentSpeed () {
-        return (gamepad1.right_trigger - gamepad1.left_trigger) * .25*throttle;
+        return (gamepad1.right_trigger - gamepad1.left_trigger) * throttleLevels[throttle];
     }
 }
