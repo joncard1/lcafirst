@@ -59,11 +59,14 @@ public class ExperimentalDriveMode extends LinearOpMode /*implements Gamepad.Gam
         leftDrive.setDirection(Direction.REVERSE);
         rightDrive.setDirection(Direction.FORWARD);
 
+
         while (opModeIsActive()) {
 
             //initially sets speed values to triggers (later conditionals change this as necessary)
             leftPower = currentSpeed();
             rightPower = currentSpeed();
+
+
 
             //Decides whether to turn and if so, whether to do a moving turn (stop the inside wheel) or a stationary turn (reverse the inside wheel)
             if (forward() || reverse()) {
@@ -99,6 +102,16 @@ public class ExperimentalDriveMode extends LinearOpMode /*implements Gamepad.Gam
             //finally sets power based on what the variables leftPower and rightPower are after all checks
             leftDrive.setPower(leftPower);
             rightDrive.setPower(rightPower);
+
+            if(this.gamepad1.a) {
+                servo1.setDirection(Direction.REVERSE);
+                servo1.setPower(1);
+            }else if(this.gamepad1.b){
+                servo1.setDirection(Direction.FORWARD);
+                servo1.setPower(1);
+            }else{
+                servo1.setPower(0);
+            }
         }
     }
 
