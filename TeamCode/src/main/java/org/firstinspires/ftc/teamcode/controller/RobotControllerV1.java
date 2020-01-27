@@ -4,6 +4,8 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DistanceSensor;
+import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.hardware.CRServo;
 
 import static org.firstinspires.ftc.teamcode.constants.ChassisGeometry.GEAR_RATIO;
 import static org.firstinspires.ftc.teamcode.constants.ChassisGeometry.HALF_WIDTH;
@@ -23,6 +25,7 @@ public class RobotControllerV1 implements RobotController {
     public DcMotor leftDrive;
     public DcMotor rightDrive;
     public DistanceSensor distance_sensor;
+    public Servo servo1;
     public double right = -Math.PI/2;
     public double left = Math.PI/2;
     public RobotControllerV1 (DcMotor leftDrive, DcMotor rightDrive) {
@@ -92,5 +95,8 @@ public class RobotControllerV1 implements RobotController {
     @Override
     public void initializeDCMotor1(DcMotor motor){
         leftDrive = motor;
+    }
+    public void initializeServo1(Servo servo){
+        servo1 = servo;
     }
 }

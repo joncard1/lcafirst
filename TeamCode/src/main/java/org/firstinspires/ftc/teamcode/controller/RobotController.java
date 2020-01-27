@@ -2,6 +2,8 @@ package org.firstinspires.ftc.teamcode.controller;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DistanceSensor;
+import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.hardware.CRServo;
 
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
@@ -32,4 +34,5 @@ public interface RobotController {
     public void initializeDistanceSensor1(DistanceSensor sensor);
     public double getDistance();
     public void initializeDCMotor1(DcMotor motor);
+    public void initializeServo1(Servo servo);
 }
