@@ -100,6 +100,16 @@ public class ExperimentalDriveMode extends LinearOpMode /*implements Gamepad.Gam
             //finally sets power based on what the variables leftPower and rightPower are after all checks
             leftDrive.setPower(leftPower);
             rightDrive.setPower(rightPower);
+
+            if(this.gamepad1.a) {
+                servo1.setDirection(Direction.REVERSE);
+                servo1.setPower(1);
+            }else if(this.gamepad1.b){
+                servo1.setDirection(Direction.FORWARD);
+                servo1.setPower(1);
+            }else{
+                servo1.setPower(0);
+            }
         }
     }
 
