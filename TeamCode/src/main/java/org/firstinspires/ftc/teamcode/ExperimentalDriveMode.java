@@ -21,6 +21,8 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Blinker;
+
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple.Direction;
@@ -31,7 +33,7 @@ public class ExperimentalDriveMode extends LinearOpMode /*implements Gamepad.Gam
     private Blinker expansion_Hub_2;
     private DcMotor rightDrive;
     private DcMotor leftDrive;
-    private CRServo servo1;
+    private Servo servo1;
     private Gyroscope imu;
 
     private String message;
@@ -47,7 +49,7 @@ public class ExperimentalDriveMode extends LinearOpMode /*implements Gamepad.Gam
         expansion_Hub_2 = hardwareMap.get(Blinker.class, "Expansion Hub 2");
         rightDrive = hardwareMap.get(DcMotor.class, "rightDrive");
         leftDrive = hardwareMap.get(DcMotor.class, "leftDrive");
-        servo1 = hardwareMap.get(CRServo.class, "servo1");
+        servo1 = hardwareMap.get(Servo.class, "servo1");
         imu = hardwareMap.get(Gyroscope.class, "imu");
         boolean adjust = true;
         telemetry.addData("Status", "Initialized");
@@ -102,13 +104,11 @@ public class ExperimentalDriveMode extends LinearOpMode /*implements Gamepad.Gam
             rightDrive.setPower(rightPower);
 
             if(this.gamepad1.a) {
-                servo1.setDirection(Direction.REVERSE);
-                servo1.setPower(1);
+                servo1.setDirection(Servo.Direction.FORWARD);
+                servo1.setPosition(Math.PI);
             }else if(this.gamepad1.b){
-                servo1.setDirection(Direction.FORWARD);
-                servo1.setPower(1);
-            }else{
-                servo1.setPower(0);
+                servo1.setDirection(Servo.Direction.REVERSE);
+                servo1.setPosition(0);
             }
         }
     }
