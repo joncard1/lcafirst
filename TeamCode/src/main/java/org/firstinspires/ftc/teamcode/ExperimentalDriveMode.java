@@ -67,8 +67,8 @@ public class ExperimentalDriveMode extends LinearOpMode /*implements Gamepad.Gam
 
         this.message = "Running";
         // run until the end of the match (driver presses STOP)
-        leftDrive.setDirection(Direction.REVERSE);
-        rightDrive.setDirection(Direction.FORWARD);
+        leftDrive.setDirection(Direction.FORWARD);
+        rightDrive.setDirection(Direction.REVERSE);
 
         while (opModeIsActive()) {
 
