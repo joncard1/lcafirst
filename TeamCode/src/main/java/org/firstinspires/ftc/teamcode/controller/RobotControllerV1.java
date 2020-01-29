@@ -26,6 +26,7 @@ public class RobotControllerV1 implements RobotController {
     public DcMotor rightDrive;
     public DistanceSensor distance_sensor;
     public Servo servo1;
+    public ColorSensor colorMain;
     public double right = -Math.PI/2;
     public double left = Math.PI/2;
     public RobotControllerV1 (DcMotor leftDrive, DcMotor rightDrive) {
@@ -99,4 +100,7 @@ public class RobotControllerV1 implements RobotController {
     public void initializeServo1(Servo servo){
         servo1 = servo;
     }
+    public void initializeColorSensor(ColorSensor color1){
+        colorMain = color1;
+    };
 }

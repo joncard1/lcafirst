@@ -35,4 +35,5 @@ public interface RobotController {
     public double getDistance();
     public void initializeDCMotor1(DcMotor motor);
     public void initializeServo1(Servo servo);
+    public void initializeColorSensor(ColorSensor color1);
 }

@@ -111,10 +111,12 @@ public class ExperimentalDriveMode extends LinearOpMode /*implements Gamepad.Gam
                 servo1.setDirection(Servo.Direction.FORWARD);
                 servo1.setPosition(Math.PI);
             } else if (this.gamepad1.b) {
-                servo1.setDirection(Servo.Direction.REVERSE);
+                servo1.setDirection(Servo.Direction.FORWARD);
                 servo1.setPosition(0);
             }
-            //Thread.sleep(10);
+            /*try {
+                Thread.sleep(10);
+            } */
         }
     }
 

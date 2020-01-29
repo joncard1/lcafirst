@@ -32,12 +32,14 @@ public class AutonomousNE extends LinearOpMode {
         rightDrive = hardwareMap.get(DcMotor.class, "rightDrive");
         leftDrive = hardwareMap.get(DcMotor.class, "leftDrive");
         controller  = new RobotControllerV1(leftDrive, rightDrive);
-        //color1 = hardwareMap.get(ColorSensor.class, "color1");
+        color1 = hardwareMap.get(ColorSensor.class, "color1");
         distanceSensor1 = hardwareMap.get(DistanceSensor.class, "distance1");
 
         //controller.initializeDistanceSensor1(distanceSensor1);
         telemetry.addData("status","starting");
         telemetry.update();
+
+        controller.initializeColorSensor(color1);
         /*while(distanceSensor1.getDistance(DistanceUnit.MM) > 100){
             telemetry.addData("distance",distanceSensor1.getDistance(DistanceUnit.MM));
             telemetry.update();
