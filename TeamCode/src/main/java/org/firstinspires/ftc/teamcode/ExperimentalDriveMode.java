@@ -68,8 +68,8 @@ public class ExperimentalDriveMode extends LinearOpMode /*implements Gamepad.Gam
         while (opModeIsActive()) {
 
             //initially sets speed values to triggers (later conditionals change this as necessary)
-            leftPower = currentSpeed();
-            rightPower = currentSpeed();
+            leftPower = triggerSpeed();
+            rightPower = triggerSpeed();
 
             //Decides whether to turn and if so, whether to do a moving turn (stop the inside wheel) or a stationary turn (reverse the inside wheel)
             if (forward() || reverse()) {
@@ -107,21 +107,22 @@ public class ExperimentalDriveMode extends LinearOpMode /*implements Gamepad.Gam
             rightDrive.setPower(rightPower);
 
             //controls servo
-            if(this.gamepad1.a) {
+            if (this.gamepad1.a) {
                 servo1.setDirection(Servo.Direction.FORWARD);
                 servo1.setPosition(Math.PI);
-            }else if(this.gamepad1.b){
+            } else if (this.gamepad1.b) {
                 servo1.setDirection(Servo.Direction.REVERSE);
                 servo1.setPosition(0);
             }
+            Thread.sleep(10);
         }
     }
 
-    public void stopMoving() {
+    public void stopMoving () {
         leftPower = 0;
         rightPower = 0;
     }
-    public void turn(double turnRate) { //negative value = left turn, positive value = right turn
+    public void turn (double turnRate) { //negative value = left turn, positive value = right turn
         leftPower = turnRate;
         rightPower = -turnRate;
     }
@@ -145,7 +146,7 @@ public class ExperimentalDriveMode extends LinearOpMode /*implements Gamepad.Gam
     public boolean leftTurn () {
         return this.gamepad1.left_bumper;
     }
-    public double currentSpeed () {
-        return (gamepad1.right_trigger - gamepad1.left_trigger) * throttleLevels[throttle];
+    public double triggerSpeed () {
+        return (gamepad1.right_trigger - gamepad1.left_trigger) * throttleLevels[throttle] * throttleOffset;
     }
 }
