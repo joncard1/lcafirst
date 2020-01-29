@@ -52,7 +52,7 @@ public class ExperimentalDriveMode extends LinearOpMode /*implements Gamepad.Gam
         expansion_Hub_2 = hardwareMap.get(Blinker.class, "Expansion Hub 2");
         rightDrive = hardwareMap.get(DcMotor.class, "rightDrive");
         leftDrive = hardwareMap.get(DcMotor.class, "leftDrive");
-        servo1 = hardwareMap.get(CRServo.class, "servo1");
+        servo1 = hardwareMap.get(Servo.class, "servo1");
         imu = hardwareMap.get(Gyroscope.class, "imu");
         boolean adjust = true;
         telemetry.addData("Status", "Initialized");
