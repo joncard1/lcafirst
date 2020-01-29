@@ -38,14 +38,14 @@ public class AutonomousNE extends LinearOpMode {
         //controller.initializeDistanceSensor1(distanceSensor1);
         telemetry.addData("status","starting");
         telemetry.update();
-        while(distanceSensor1.getDistance(DistanceUnit.MM) > 100){
+        /*while(distanceSensor1.getDistance(DistanceUnit.MM) > 100){
             telemetry.addData("distance",distanceSensor1.getDistance(DistanceUnit.MM));
             telemetry.update();
             controller.newMove(1);
-        }
+        }*/
 
 
-        /*
+        
         controller.newMove(15);
         controller.goUntilRed(color1);
         controller.newMove(15);
@@ -57,7 +57,7 @@ public class AutonomousNE extends LinearOpMode {
         controller.newMove(45);
         controller.newTurn(left);
         controller.goUntilRed(color1);
-        controller.newMove(15);*/
+        controller.newMove(15);
 
 
 
