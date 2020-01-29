@@ -33,11 +33,8 @@ public class ExperimentalDriveMode extends LinearOpMode /*implements Gamepad.Gam
     private Blinker expansion_Hub_2;
     private DcMotor rightDrive;
     private DcMotor leftDrive;
-<<<<<<< HEAD
    // private CRServo servo1;
-=======
     private Servo servo1;
->>>>>>> 41064a2fb38227a789cb7913fbd5713019ed3d4c
     private Gyroscope imu;
 
     private String message;
@@ -53,11 +50,7 @@ public class ExperimentalDriveMode extends LinearOpMode /*implements Gamepad.Gam
         expansion_Hub_2 = hardwareMap.get(Blinker.class, "Expansion Hub 2");
         rightDrive = hardwareMap.get(DcMotor.class, "rightDrive");
         leftDrive = hardwareMap.get(DcMotor.class, "leftDrive");
-<<<<<<< HEAD
-       // servo1 = hardwareMap.get(CRServo.class, "servo1");
-=======
         servo1 = hardwareMap.get(Servo.class, "servo1");
->>>>>>> 41064a2fb38227a789cb7913fbd5713019ed3d4c
         imu = hardwareMap.get(Gyroscope.class, "imu");
         boolean adjust = true;
         telemetry.addData("Status", "Initialized");
@@ -111,17 +104,6 @@ public class ExperimentalDriveMode extends LinearOpMode /*implements Gamepad.Gam
             leftDrive.setPower(leftPower);
             rightDrive.setPower(rightPower);
 
-<<<<<<< HEAD
-            /*if(this.gamepad1.a) {
-                servo1.setDirection(Direction.REVERSE);
-                servo1.setPower(1);
-            }else if(this.gamepad1.b){
-                servo1.setDirection(Direction.FORWARD);
-                servo1.setPower(1);
-            }else{
-                servo1.setPower(0);
-            }*/
-=======
             if(this.gamepad1.a) {
                 servo1.setDirection(Servo.Direction.FORWARD);
                 servo1.setPosition(Math.PI);
@@ -129,7 +111,6 @@ public class ExperimentalDriveMode extends LinearOpMode /*implements Gamepad.Gam
                 servo1.setDirection(Servo.Direction.REVERSE);
                 servo1.setPosition(0);
             }
->>>>>>> 41064a2fb38227a789cb7913fbd5713019ed3d4c
         }
     }
 
