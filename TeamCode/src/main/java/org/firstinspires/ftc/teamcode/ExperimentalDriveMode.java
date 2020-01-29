@@ -43,7 +43,7 @@ public class ExperimentalDriveMode extends LinearOpMode /*implements Gamepad.Gam
     double [] throttleLevels = new double [] {0.1, 0.5, 1.0};
 
     //this variable increases to 1 slowly to slow down acceleration, thereby increasing control
-    double throttleOffset = 0;
+    //double throttleOffset = 0;
 
 
     @Override
@@ -114,7 +114,7 @@ public class ExperimentalDriveMode extends LinearOpMode /*implements Gamepad.Gam
                 servo1.setDirection(Servo.Direction.REVERSE);
                 servo1.setPosition(0);
             }
-            Thread.sleep(10);
+            //Thread.sleep(10);
         }
     }
 
@@ -147,6 +147,6 @@ public class ExperimentalDriveMode extends LinearOpMode /*implements Gamepad.Gam
         return this.gamepad1.left_bumper;
     }
     public double triggerSpeed () {
-        return (gamepad1.right_trigger - gamepad1.left_trigger) * throttleLevels[throttle] * throttleOffset;
+        return (gamepad1.right_trigger - gamepad1.left_trigger) * throttleLevels[throttle] /* * throttleOffset*/;
     }
 }
