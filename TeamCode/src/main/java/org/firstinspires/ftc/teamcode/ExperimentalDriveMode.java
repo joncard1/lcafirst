@@ -33,7 +33,7 @@ public class ExperimentalDriveMode extends LinearOpMode /*implements Gamepad.Gam
     private Blinker expansion_Hub_2;
     private DcMotor rightDrive;
     private DcMotor leftDrive;
-   // private Servo servo1;
+    private Servo servo1;
     private Gyroscope imu;
 
     private String message;
@@ -42,6 +42,9 @@ public class ExperimentalDriveMode extends LinearOpMode /*implements Gamepad.Gam
     int throttle = 1;
     double [] throttleLevels = new double [] {0.1, 0.5, 1.0};
 
+    //this variable increases to 1 slowly to slow down acceleration, thereby increasing control
+    double throttleOffset = 0;
+
 
     @Override
     public void runOpMode() {
@@ -49,7 +52,7 @@ public class ExperimentalDriveMode extends LinearOpMode /*implements Gamepad.Gam
         expansion_Hub_2 = hardwareMap.get(Blinker.class, "Expansion Hub 2");
         rightDrive = hardwareMap.get(DcMotor.class, "rightDrive");
         leftDrive = hardwareMap.get(DcMotor.class, "leftDrive");
-       // servo1 = hardwareMap.get(CRServo.class, "servo1");
+        servo1 = hardwareMap.get(CRServo.class, "servo1");
         imu = hardwareMap.get(Gyroscope.class, "imu");
         boolean adjust = true;
         telemetry.addData("Status", "Initialized");
@@ -103,14 +106,14 @@ public class ExperimentalDriveMode extends LinearOpMode /*implements Gamepad.Gam
             leftDrive.setPower(leftPower);
             rightDrive.setPower(rightPower);
 
-            /*
+            //controls servo
             if(this.gamepad1.a) {
                 servo1.setDirection(Servo.Direction.FORWARD);
                 servo1.setPosition(Math.PI);
             }else if(this.gamepad1.b){
                 servo1.setDirection(Servo.Direction.REVERSE);
                 servo1.setPosition(0);
-            }*/
+            }
         }
     }
 
