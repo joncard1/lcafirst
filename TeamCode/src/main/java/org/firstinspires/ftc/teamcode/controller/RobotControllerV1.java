@@ -29,6 +29,8 @@ public class RobotControllerV1 implements RobotController {
     public ColorSensor colorMain;
     public double right = -Math.PI/2;
     public double left = Math.PI/2;
+    public double color1Disabled = 1;
+    public double numberOfTimesHitColor = 0;
     public RobotControllerV1 (DcMotor leftDrive, DcMotor rightDrive) {
        this.rightDrive = rightDrive;
        this.leftDrive = leftDrive;
@@ -75,14 +77,27 @@ public class RobotControllerV1 implements RobotController {
     }
     @Override
     public void goUntilBlue(ColorSensor color1){
+        if(color1Disabled) {
+            while(getDistance()>45*3){
+                moveForward(1)
+            }
+    }else{
         while (color1.red() <= color1.blue()) {
             moveForward(1);
         }
     }
+    }
     @Override
     public void goUntilRed(ColorSensor color1){
-        while (color1.red() >= color1.blue()) {
-            moveForward(1);
+        if(color1Disabled) {
+                while(getDistance()>45*3){
+                    moveForward(1)
+                }
+            
+        }else{
+            while (color1.red() >= color1.blue()) {
+                moveForward(1);
+            }
         }
     }
     @Override
