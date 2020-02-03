@@ -50,7 +50,7 @@ public class AutonomousNE extends LinearOpMode {
 
         
         controller.newMove(15);
-        controller.newTurn(left)
+        controller.newTurn(left);
         controller.goUntilRed(color1);
         controller.newMove(15);
         controller.newTurn(right);
