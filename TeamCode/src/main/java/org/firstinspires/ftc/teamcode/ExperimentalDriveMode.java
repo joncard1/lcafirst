@@ -42,8 +42,8 @@ public class ExperimentalDriveMode extends LinearOpMode /*implements Gamepad.Gam
     int throttle = 1;
     double [] throttleLevels = new double [] {0.1, 0.5, 1.0};
 
-    //this variable increases to 1 slowly to slow down acceleration, thereby increasing control
-    //double throttleOffset = 0;
+    //this allows incrementation of throttle to avoid gear grinding and loss of control
+    // double throttleOffset = 0;
 
 
     @Override
@@ -70,6 +70,9 @@ public class ExperimentalDriveMode extends LinearOpMode /*implements Gamepad.Gam
             //initially sets speed values to triggers (later conditionals change this as necessary)
             leftPower = triggerSpeed();
             rightPower = triggerSpeed();
+            if (triggerSpeed() == 0) {
+                throttle = 0;
+            }
 
             //Decides whether to turn and if so, whether to do a moving turn (stop the inside wheel) or a stationary turn (reverse the inside wheel)
             if (forward() || reverse()) {
@@ -85,9 +88,9 @@ public class ExperimentalDriveMode extends LinearOpMode /*implements Gamepad.Gam
                 if (leftTurn() && rightTurn()) {
                     //does nothing if both are pressed
                 } else if (leftTurn()) {
-                    turn(-throttleLevels[throttle] / 2);
+                    turn(-throttleLevels[throttle] / 1.5);
                 } else if (rightTurn()) {
-                    turn(throttleLevels[throttle] / 2);
+                    turn(throttleLevels[throttle] / 1.5);
                 }
             }
 
@@ -116,7 +119,12 @@ public class ExperimentalDriveMode extends LinearOpMode /*implements Gamepad.Gam
             }
             /*try {
                 Thread.sleep(10);
-            } */
+            } catch (Exception e) {
+                telemetry.addData("message", "this didn't run");
+                telemetry.update();
+            }*/
+
+
         }
     }
 
@@ -149,6 +157,10 @@ public class ExperimentalDriveMode extends LinearOpMode /*implements Gamepad.Gam
         return this.gamepad1.left_bumper;
     }
     public double triggerSpeed () {
-        return (gamepad1.right_trigger - gamepad1.left_trigger) * throttleLevels[throttle] /* * throttleOffset*/;
+        return ((gamepad1.right_trigger - gamepad1.left_trigger) * throttleLevels[throttle])/* * throttleOffset*/;
+        /*if (triggerSpeed() == 0) {
+            throttleOffset = 0;
+        }
+        throttleOffset += .01;*/
     }
 }
