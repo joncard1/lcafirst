@@ -73,7 +73,7 @@ public class RobotControllerV1 implements RobotController {
     @Override
     public void newTurn(double rad){
         rad = -rad;
-        autoTurn(rad,.2);while (leftDrive.isBusy() && rightDrive.isBusy()) {};
+        autoTurn(rad,1);while (leftDrive.isBusy() && rightDrive.isBusy()) {};
     }
     @Override
     public void goUntilBlue(ColorSensor color1){

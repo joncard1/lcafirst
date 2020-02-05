@@ -36,7 +36,7 @@ public class AutonomousTest extends LinearOpMode {
         //controller.initializeDistanceSensor1(distanceSensor1);
         telemetry.addData("status","starting");
         telemetry.update();
-        controller.newMove(15);
+        controller.newTurn(Math.PI/2);
 
         //consider adding distance sensor. I dont know if this is the one we have, but it seems straightforward to impliment: https://wpilib.screenstepslive.com/s/currentCS/m/java/l/599715-ultrasonic-sensors-measuring-robot-distance-to-a-surface
     }
