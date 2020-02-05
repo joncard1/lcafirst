@@ -73,13 +73,13 @@ public class RobotControllerV1 implements RobotController {
     @Override
     public void newTurn(double rad){
         rad = -rad;
-        turn(rad);while (leftDrive.isBusy() && rightDrive.isBusy()) {};
+        autoTurn(rad,.2);while (leftDrive.isBusy() && rightDrive.isBusy()) {};
     }
     @Override
     public void goUntilBlue(ColorSensor color1){
-        if(color1Disabled) {
+        if(color1Disabled==1) {
             while(getDistance()>45*3){
-                moveForward(1)
+                autoMove(1,.4);
             }
     }else{
         while (color1.red() <= color1.blue()) {
@@ -89,9 +89,9 @@ public class RobotControllerV1 implements RobotController {
     }
     @Override
     public void goUntilRed(ColorSensor color1){
-        if(color1Disabled) {
+        if(color1Disabled==1) {
                 while(getDistance()>45*3){
-                    moveForward(1)
+                    autoMove(1,.4);
                 }
             
         }else{
@@ -117,5 +117,25 @@ public class RobotControllerV1 implements RobotController {
     }
     public void initializeColorSensor(ColorSensor color1){
         colorMain = color1;
+    };
+    public void autoTurn(double rad, double pow){
+        leftDrive.setDirection(DcMotor.Direction.FORWARD);
+        rightDrive.setDirection(DcMotor.Direction.FORWARD);
+        leftDrive.setTargetPosition((int)(leftDrive.getCurrentPosition() + (144/Math.PI)*HALF_WIDTH*rad*GEAR_RATIO));
+        rightDrive.setTargetPosition((int)(rightDrive.getCurrentPosition() + (144/Math.PI)*HALF_WIDTH*rad*GEAR_RATIO));
+        leftDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        rightDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        leftDrive.setPower(pow);
+        rightDrive.setPower(pow);
+    };
+    public void autoMove(double dist, double pow){
+        leftDrive.setDirection(DcMotor.Direction.FORWARD);
+        rightDrive.setDirection(DcMotor.Direction.REVERSE);
+        leftDrive.setTargetPosition((int)(leftDrive.getCurrentPosition() + (144/Math.PI)*dist*GEAR_RATIO));
+        rightDrive.setTargetPosition((int)(rightDrive.getCurrentPosition() + (144/Math.PI)*dist*GEAR_RATIO));
+        leftDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        rightDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        leftDrive.setPower(pow);
+        rightDrive.setPower(pow);
     };
 }
