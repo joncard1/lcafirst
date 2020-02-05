@@ -36,4 +36,6 @@ public interface RobotController {
     public void initializeDCMotor1(DcMotor motor);
     public void initializeServo1(Servo servo);
     public void initializeColorSensor(ColorSensor color1);
+    public void autoTurn(double rad, double pow);
+    public void autoMove(double dist, double pow);
 }
