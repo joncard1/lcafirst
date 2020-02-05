@@ -47,7 +47,6 @@ public class ExperimentalDriveMode extends LinearOpMode /*implements Gamepad.Gam
     //this allows incrementation of throttle to avoid gear grinding and loss of control
     //double throttleOffset = 0;
 
-
     @Override
     public void runOpMode() {
         //RobotController controller  = new RobotControllerV1 (leftDrive, rightDrive);
