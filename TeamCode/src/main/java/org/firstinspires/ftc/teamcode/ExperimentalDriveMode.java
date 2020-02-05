@@ -39,7 +39,7 @@ public class ExperimentalDriveMode extends LinearOpMode /*implements Gamepad.Gam
     private String message;
     double leftPower = 0;
     double rightPower = 0;
-    int throttle = 1;
+    int throttle = 0; // throttle is determined by index (this variable) in throttleLevels array
     double [] throttleLevels = new double [] {0.33, 0.67, 1.0};
 
     //this allows incrementation of throttle to avoid gear grinding and loss of control
