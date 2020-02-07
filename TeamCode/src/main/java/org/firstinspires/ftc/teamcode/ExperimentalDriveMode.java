@@ -35,16 +35,17 @@ public class ExperimentalDriveMode extends LinearOpMode /*implements Gamepad.Gam
     private DcMotor leftDrive;
     private Servo servo1;
     private Gyroscope imu;
-
     private String message;
     double leftPower = 0;
     double rightPower = 0;
-    int throttle = 1;
-    double [] throttleLevels = new double [] {0.33, 0.67, 1.0};
+    int throttle = 0; // throttle is determined by index (this variable) in throttleLevels array
+
+    //variables to adjust to tune robot speed/handling
+    double [] throttleLevels = new double [] {0.33, 0.67, 1.0}; //array of throttle settings (all references calculate length dynamically, add/remove as much as we need)
+    double standingTurnMultiplier = .67; //this variable adjusts the speed of the standing turn (multiplied to lowest throttle setting to determine turn rate)
 
     //this allows incrementation of throttle to avoid gear grinding and loss of control
     //double throttleOffset = 0;
-
 
     @Override
     public void runOpMode() {
@@ -88,9 +89,9 @@ public class ExperimentalDriveMode extends LinearOpMode /*implements Gamepad.Gam
                 if (leftTurn() && rightTurn()) {
                     //does nothing if both are pressed
                 } else if (leftTurn()) {
-                    turn(-throttleLevels[throttle] / 1.5);
+                    turn(-throttleLevels[throttle] * standingTurnMultiplier);
                 } else if (rightTurn()) {
-                    turn(throttleLevels[throttle] / 1.5);
+                    turn(throttleLevels[throttle] * standingTurnMultiplier);
                 }
             }
 
