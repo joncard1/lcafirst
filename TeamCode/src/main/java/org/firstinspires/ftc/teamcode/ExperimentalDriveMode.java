@@ -42,6 +42,7 @@ public class ExperimentalDriveMode extends LinearOpMode /*implements Gamepad.Gam
 
     //variables to adjust to tune robot speed/handling
     double [] throttleLevels = new double [] {0.33, 0.67, 1.0}; //array of throttle settings (all references calculate length dynamically, add/remove as much as we need)
+    double [] throttleLevelsSave = throttleLevels;
     double standingTurnMultiplier = .67; //this variable adjusts the speed of the standing turn (multiplied to lowest throttle setting to determine turn rate)
 
     //this allows incrementation of throttle to avoid gear grinding and loss of control
@@ -72,7 +73,7 @@ public class ExperimentalDriveMode extends LinearOpMode /*implements Gamepad.Gam
             leftPower = triggerSpeed();
             rightPower = triggerSpeed();
             if (triggerSpeed() == 0) {
-                throttle = 0;
+                //throttle = 0;
             }
 
             //Decides whether to turn and if so, whether to do a moving turn (stop the inside wheel) or a stationary turn (reverse the inside wheel)
@@ -94,7 +95,7 @@ public class ExperimentalDriveMode extends LinearOpMode /*implements Gamepad.Gam
                     turn(throttleLevels[throttle] * standingTurnMultiplier);
                 }
             }
-
+            int previousThrottle = throttle;
             //throttle level adjustment via D-Pad
             if (this.gamepad1.dpad_up && throttle < throttleLevels.length - 1 && adjust) {
                 throttle++;
@@ -104,6 +105,14 @@ public class ExperimentalDriveMode extends LinearOpMode /*implements Gamepad.Gam
                 adjust = false;
             } else if (!this.gamepad1.dpad_up && !this.gamepad1.dpad_down) {
                 adjust = true;
+            }
+            if(previousThrottle != throttle && !this.gamepad1.a){
+                throttleLevels[previousThrottle]=throttleLevelsSave[previousThrottle];
+                double i = 0;
+                while(i<throttleLevelsSave[throttle]){
+                    throttleLevels[throttle]=i;
+                    i+=.001;
+                }
             }
 
             //finally sets power based on what the variables leftPower and rightPower are after all checks
