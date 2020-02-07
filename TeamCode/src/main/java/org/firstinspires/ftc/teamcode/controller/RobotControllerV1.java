@@ -125,8 +125,12 @@ public class RobotControllerV1 implements RobotController {
         rightDrive.setTargetPosition((int)(rightDrive.getCurrentPosition() + (144/Math.PI)*HALF_WIDTH*rad*GEAR_RATIO));
         leftDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         rightDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        leftDrive.setPower(pow);
-        rightDrive.setPower(pow);
+        double i = 0;
+        while(i<pow) {
+            leftDrive.setPower(i);
+            rightDrive.setPower(i);
+            i+=.001;
+        }
     };
     public void autoMove(double dist, double pow){
         leftDrive.setDirection(DcMotor.Direction.FORWARD);
@@ -135,7 +139,11 @@ public class RobotControllerV1 implements RobotController {
         rightDrive.setTargetPosition((int)(rightDrive.getCurrentPosition() + (144/Math.PI)*dist*GEAR_RATIO));
         leftDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         rightDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        leftDrive.setPower(pow);
-        rightDrive.setPower(pow);
+        double i = 0;
+        while(i<pow) {
+            leftDrive.setPower(i);
+            rightDrive.setPower(i);
+            i+=.001;
+        }
     };
 }
